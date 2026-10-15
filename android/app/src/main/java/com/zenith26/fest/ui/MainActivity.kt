@@ -70,6 +70,7 @@ class MainActivity : AppCompatActivity() {
         setupTopNav()
         setupPortalUI()
         setupAdminUI()
+        setupClubhouseRunners()
 
         // Initial load
         showPortalView()
@@ -479,4 +480,56 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
+    private var runnerScrollJob: Job? = null
+
+    private fun setupClubhouseRunners() {
+        val runners = listOf(
+            Triple(binding.runnerMickeyView, "🐭 Mickey Mouse", "Oh Boy! Welcome to Zenith '26! 🎈"),
+            Triple(binding.runnerMinnieView, "🎀 Minnie Mouse", "Yoo-Hoo! Sweet fest treats! 🎀"),
+            Triple(binding.runnerDonaldView, "🦆 Donald Duck", "Aw, Phooey! Let's Go! 🦆"),
+            Triple(binding.runnerDaisyView, "💜 Daisy Duck", "Simply fabulous! 💜"),
+            Triple(binding.runnerGoofyView, "🐕 Goofy", "Gawrsh! Hot dog, hot diggity dog! 🐕")
+        )
+
+        runners.forEach { (view, name, quote) ->
+            view.setOnClickListener {
+                view.animate().scaleX(1.15f).scaleY(1.15f).setDuration(120).withEndAction {
+                    view.animate().scaleX(1.0f).scaleY(1.0f).setDuration(120).start()
+                }.start()
+                Toast.makeText(this, "$name: \"$quote\"", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        // Auto-run animation across the scroll track
+        runnerScrollJob?.cancel()
+        runnerScrollJob = CoroutineScope(Dispatchers.Main).launch {
+            var scrollX = 0
+            var direction = 1
+            while (true) {
+                delay(30)
+                val maxScroll = binding.clubhouseCharactersContainer.width - binding.clubhouseHorizontalScroll.width
+                if (maxScroll > 0) {
+                    scrollX += (2 * direction)
+                    if (scrollX >= maxScroll) {
+                        scrollX = maxScroll
+                        direction = -1
+                        delay(1200)
+                    } else if (scrollX <= 0) {
+                        scrollX = 0
+                        direction = 1
+                        delay(1200)
+                    }
+                    binding.clubhouseHorizontalScroll.scrollTo(scrollX, 0)
+                }
+            }
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        runnerScrollJob?.cancel()
+        searchDebounceJob?.cancel()
+    }
 }
+

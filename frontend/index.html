@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Zenith '26 — The Sweetest College Fest 🍦☕🍫</title>
+  <title>Zenith '26 — Mickey Mouse Clubhouse Edition 🏰🐭🍦</title>
   <!-- Favicon as inline SVG -->
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍨</text></svg>">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐭</text></svg>">
   
   <!-- Tailwind CSS via Play CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Fredoka:wght@600;700;800&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet">
 
   <script>
     tailwind.config = {
@@ -20,6 +20,7 @@
           fontFamily: {
             sans: ['"Plus Jakarta Sans"', 'sans-serif'],
             display: ['"Playfair Display"', 'serif'],
+            fun: ['"Fredoka"', 'cursive', 'sans-serif'],
           },
           colors: {
             butter: {
@@ -44,12 +45,12 @@
               900: '#211510',
               950: '#140c09',
             },
-            choco: {
-              light: '#8d5b4c',
-              DEFAULT: '#4a2810',
-              dark: '#2d180a',
-              syrup: '#1a0d05',
-              caramel: '#d97706',
+            disney: {
+              red: '#E52521',
+              yellow: '#FFCC00',
+              blue: '#1976D2',
+              purple: '#9C27B0',
+              green: '#4CAF50',
             }
           },
           animation: {
@@ -58,7 +59,7 @@
             'float-fast': 'floatSlow 5s ease-in-out 1s infinite',
             'pop': 'pop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
             'fade-in': 'fadeIn 0.35s ease-out forwards',
-            'shimmer': 'shimmer 2.5s infinite linear',
+            'sparkle': 'sparkle 1.8s ease-in-out infinite alternate',
           },
           keyframes: {
             floatSlow: {
@@ -74,9 +75,9 @@
               '0%': { opacity: '0', transform: 'translateY(8px)' },
               '100%': { opacity: '1', transform: 'translateY(0)' },
             },
-            shimmer: {
-              '0%': { backgroundPosition: '-200% 0' },
-              '100%': { backgroundPosition: '200% 0' },
+            sparkle: {
+              '0%': { opacity: '0.4', transform: 'scale(0.8)' },
+              '100%': { opacity: '1', transform: 'scale(1.15)' },
             }
           }
         }
@@ -95,13 +96,6 @@
       background-size: 32px 32px, 24px 24px, 24px 24px;
     }
     
-    /* Chocolate Drip divider */
-    .choco-drip {
-      background: radial-gradient(circle at 10px -5px, transparent 12px, #211510 13px);
-      background-size: 24px 20px;
-    }
-
-    /* Soft creamy card gradient */
     .creamy-card {
       background: linear-gradient(180deg, #ffffff 0%, #fffdf8 100%);
       box-shadow: 0 4px 20px -2px rgba(74, 48, 34, 0.08), 0 2px 6px -1px rgba(74, 48, 34, 0.04);
@@ -112,43 +106,182 @@
       transform: translateY(-4px);
     }
 
-    /* Delicious gold glow */
     .butter-glow {
       box-shadow: 0 0 20px rgba(234, 179, 8, 0.35);
     }
+
+    /* ======================================================== */
+    /* MICKEY MOUSE CLUBHOUSE RUNNING ANIMATIONS                */
+    /* ======================================================== */
+    .clubhouse-runner-track {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 125px;
+      pointer-events: none;
+      z-index: 45;
+      overflow: hidden;
+    }
+
+    .clubhouse-runner-item {
+      position: absolute;
+      bottom: 8px;
+      pointer-events: auto;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      user-select: none;
+      will-change: transform, left;
+      transition: filter 0.2s ease;
+    }
+
+    .clubhouse-runner-item:hover {
+      filter: drop-shadow(0 0 12px rgba(255, 204, 0, 0.9));
+    }
+
+    .speech-bubble {
+      opacity: 0;
+      transform: translateY(6px) scale(0.9);
+      transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      pointer-events: none;
+      white-space: nowrap;
+      font-family: 'Fredoka', cursive, sans-serif;
+    }
+
+    .clubhouse-runner-item:hover .speech-bubble,
+    .clubhouse-runner-item.speaking .speech-bubble {
+      opacity: 1;
+      transform: translateY(-2px) scale(1);
+    }
+
+    /* Staggered Continuous Running Track Animation across screen */
+    .runner-mickey {
+      animation: runTrack 17s linear infinite;
+      animation-delay: 0s;
+    }
+    .runner-mickey .char-sprite {
+      animation: bobMickey 0.32s ease-in-out infinite alternate;
+    }
+
+    .runner-minnie {
+      animation: runTrack 17s linear infinite;
+      animation-delay: 2.4s;
+    }
+    .runner-minnie .char-sprite {
+      animation: bobMinnie 0.35s ease-in-out infinite alternate;
+    }
+
+    .runner-donald {
+      animation: runTrack 17s linear infinite;
+      animation-delay: 4.8s;
+    }
+    .runner-donald .char-sprite {
+      animation: bobDonald 0.28s ease-in-out infinite alternate;
+    }
+
+    .runner-daisy {
+      animation: runTrack 17s linear infinite;
+      animation-delay: 7.2s;
+    }
+    .runner-daisy .char-sprite {
+      animation: bobDaisy 0.34s ease-in-out infinite alternate;
+    }
+
+    .runner-goofy {
+      animation: runTrack 17s linear infinite;
+      animation-delay: 9.6s;
+    }
+    .runner-goofy .char-sprite {
+      animation: bobGoofy 0.44s ease-in-out infinite alternate;
+    }
+
+    @keyframes runTrack {
+      0% {
+        left: -160px;
+      }
+      100% {
+        left: calc(100vw + 160px);
+      }
+    }
+
+    @keyframes bobMickey {
+      0% { transform: translateY(0px) rotate(-3deg); }
+      100% { transform: translateY(-15px) rotate(4deg); }
+    }
+
+    @keyframes bobMinnie {
+      0% { transform: translateY(0px) rotate(-2deg); }
+      100% { transform: translateY(-13px) rotate(3deg); }
+    }
+
+    @keyframes bobDonald {
+      0% { transform: translateY(0px) rotate(-8deg); }
+      100% { transform: translateY(-11px) rotate(8deg); }
+    }
+
+    @keyframes bobDaisy {
+      0% { transform: translateY(0px) rotate(-3deg); }
+      100% { transform: translateY(-12px) rotate(4deg); }
+    }
+
+    @keyframes bobGoofy {
+      0% { transform: translateY(0px) rotate(-5deg); }
+      40% { transform: translateY(-22px) rotate(7deg); }
+      75% { transform: translateY(-7px) rotate(-2deg); }
+      100% { transform: translateY(0px) rotate(-5deg); }
+    }
+
+    /* Little dust puff puffing behind feet */
+    .dust-puff {
+      animation: dustPuff 0.6s infinite ease-out;
+    }
+    @keyframes dustPuff {
+      0% { opacity: 0.8; transform: translate(10px, 4px) scale(0.6); }
+      100% { opacity: 0; transform: translate(30px, -6px) scale(1.6); }
+    }
   </style>
 </head>
-<body class="bg-[#faf6f0] text-coffee-900 min-h-screen flex flex-col font-sans antialiased selection:bg-butter-400 selection:text-coffee-950">
+<body class="bg-[#faf6f0] text-coffee-900 min-h-screen flex flex-col font-sans antialiased selection:bg-butter-400 selection:text-coffee-950 pb-20">
 
   <!-- Top Navigation Bar -->
-  <header class="sticky top-0 z-40 bg-coffee-950/95 backdrop-blur-md text-white border-b border-coffee-800 shadow-lg">
+  <header class="sticky top-0 z-40 bg-coffee-950/95 backdrop-blur-md text-white border-b-2 border-amber-500/40 shadow-lg">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 flex items-center justify-between">
       
-      <!-- Brand Logo -->
+      <!-- Brand Logo with Mickey Silhouette & Fest Tag -->
       <div class="flex items-center space-x-3">
-        <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-butter-400 to-amber-600 flex items-center justify-center text-xl shadow-md transform hover:rotate-12 transition">
-          🍨
+        
+        <!-- Mickey Ears Logo Emblem -->
+        <div class="relative w-11 h-11 rounded-2xl bg-gradient-to-br from-disney-red to-amber-600 flex items-center justify-center text-xl shadow-md transform hover:rotate-12 transition">
+          <svg class="w-8 h-8 text-white filter drop-shadow" viewBox="0 0 100 100" fill="currentColor">
+            <!-- Mickey Silhouette: Center head and two circular ears -->
+            <circle cx="50" cy="58" r="28" />
+            <circle cx="24" cy="28" r="18" />
+            <circle cx="76" cy="28" r="18" />
+          </svg>
         </div>
+
         <div>
           <div class="flex items-center gap-2">
             <a href="/" class="text-xl sm:text-2xl font-black tracking-tight font-display bg-gradient-to-r from-butter-200 via-amber-300 to-butter-400 bg-clip-text text-transparent hover:opacity-90 transition">
               ZENITH '26
             </a>
-            <span class="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider bg-amber-500/20 text-butter-300 px-2.5 py-0.5 rounded-full border border-amber-500/30">
-              <span>☕</span> Butter &amp; Cocoa Edition
+            <span class="inline-flex items-center gap-1 text-[10px] font-black uppercase tracking-wider bg-disney-red text-white px-2.5 py-0.5 rounded-full border border-amber-300 shadow-xs">
+              <span>🏰</span> Clubhouse Fest
             </span>
           </div>
-          <p class="text-[11px] text-amber-200/60 font-medium hidden sm:block">Artisanal Campus Fest &amp; Student Portal</p>
+          <p class="text-[11px] text-amber-200/80 font-medium hidden sm:block">Mickey, Minnie, Donald, Daisy &amp; Goofy Special Edition</p>
         </div>
       </div>
 
       <!-- Navigation & Quick Actions -->
       <nav class="flex items-center space-x-2 sm:space-x-4">
         <a href="/" class="text-xs sm:text-sm font-bold text-coffee-950 px-4 py-2 rounded-xl bg-gradient-to-r from-butter-300 to-butter-400 hover:from-butter-200 hover:to-butter-300 shadow-md transition active:scale-95 flex items-center gap-1.5">
-          <span>🍦</span>
-          <span>Fest Flavors</span>
+          <span>🍨</span>
+          <span>Fest Delights</span>
         </a>
-        <a href="/admin.html" class="text-xs sm:text-sm font-semibold text-coffee-200 hover:text-white px-3.5 py-2 rounded-xl hover:bg-coffee-900 border border-coffee-800/80 hover:border-amber-600/50 transition flex items-center gap-1.5">
+        <a href="/admin.html" class="text-xs sm:text-sm font-semibold text-coffee-200 hover:text-white px-3.5 py-2 rounded-xl hover:bg-coffee-900 border border-coffee-800/80 hover:border-amber-500/50 transition flex items-center gap-1.5">
           <span>📊</span>
           <span class="hidden sm:inline">Coordinator Lounge</span>
           <span class="sm:hidden">Admin</span>
@@ -157,58 +290,61 @@
     </div>
   </header>
 
-  <!-- Hero Section: Delicious Dessert Vibe -->
-  <section class="relative waffle-pattern text-white pt-16 pb-20 px-4 sm:px-6 lg:px-8 overflow-hidden border-b-4 border-amber-500/40">
+  <!-- Hero Section: Clubhouse + Butter & Chocolate Theme -->
+  <section class="relative waffle-pattern text-white pt-16 pb-20 px-4 sm:px-6 lg:px-8 overflow-hidden border-b-4 border-amber-500/50">
     
-    <!-- Floating Dessert Emojis Background Elements -->
-    <div class="absolute inset-0 pointer-events-none select-none overflow-hidden opacity-30">
-      <span class="absolute top-6 left-[8%] text-4xl animate-float-slow">🍦</span>
-      <span class="absolute top-16 right-[10%] text-5xl animate-float-delay">☕</span>
-      <span class="absolute bottom-10 left-[15%] text-4xl animate-float-fast">🍫</span>
-      <span class="absolute top-32 left-[48%] text-3xl animate-float-slow">🧇</span>
-      <span class="absolute bottom-8 right-[20%] text-4xl animate-float-delay">🍨</span>
-      <span class="absolute top-12 left-[32%] text-3xl animate-float-fast">🍩</span>
+    <!-- Floating Clubhouse & Dessert Background Elements -->
+    <div class="absolute inset-0 pointer-events-none select-none overflow-hidden opacity-35">
+      <span class="absolute top-6 left-[6%] text-5xl animate-float-slow filter drop-shadow">🎈</span>
+      <span class="absolute top-14 right-[8%] text-5xl animate-float-delay filter drop-shadow">🏰</span>
+      <span class="absolute bottom-10 left-[12%] text-4xl animate-float-fast">🍦</span>
+      <span class="absolute top-28 left-[45%] text-4xl animate-float-slow">⭐</span>
+      <span class="absolute bottom-8 right-[18%] text-4xl animate-float-delay">🍫</span>
+      <span class="absolute top-10 left-[26%] text-4xl animate-float-fast">☕</span>
     </div>
 
     <!-- Soft Glow Radials -->
-    <div class="absolute -top-24 -left-24 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
-    <div class="absolute -bottom-24 -right-24 w-96 h-96 bg-amber-600/10 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute -top-24 -left-24 w-96 h-96 bg-disney-red/20 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute -bottom-24 -right-24 w-96 h-96 bg-amber-500/20 rounded-full blur-3xl pointer-events-none"></div>
 
     <div class="relative max-w-5xl mx-auto text-center space-y-6">
       
-      <!-- Date Badge -->
-      <div class="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-amber-200 bg-coffee-900/80 px-4 py-1.5 rounded-full border border-amber-500/40 shadow-inner backdrop-blur">
-        <span>🍂</span>
-        <span>November 14–15, 2026 · Grand Campus Amphitheatre &amp; Arena</span>
-        <span>☕</span>
+      <!-- Date & Clubhouse Badge -->
+      <div class="inline-flex items-center gap-2 text-xs sm:text-sm font-extrabold text-amber-200 bg-coffee-950/80 px-5 py-2 rounded-full border-2 border-amber-500/50 shadow-lg backdrop-blur">
+        <span>✨</span>
+        <span>"Meeska, Mooska, Mickey Mouse!" · November 14–15, 2026</span>
+        <span>🎈</span>
       </div>
 
       <!-- Main Headline -->
       <h1 class="text-4xl sm:text-6xl lg:text-7xl font-black font-display tracking-tight text-white leading-tight">
-        Scoop Your Passion at <br class="hidden sm:inline" />
-        <span class="bg-gradient-to-r from-butter-200 via-butter-300 to-amber-400 bg-clip-text text-transparent drop-shadow-sm">
+        Join the Clubhouse at <br class="hidden sm:inline" />
+        <span class="bg-gradient-to-r from-butter-200 via-amber-300 to-amber-400 bg-clip-text text-transparent drop-shadow-md">
           Zenith '26
         </span>
       </h1>
 
       <!-- Subtitle -->
-      <p class="max-w-2xl mx-auto text-base sm:text-lg text-coffee-200/90 leading-relaxed font-medium">
-        Where velvety dark mocha code meets sweet caramel rhythms, high-energy espresso showdowns, and artisanal gaming glory. 48 hours of pure collegiate sweetness!
+      <p class="max-w-2xl mx-auto text-base sm:text-lg text-coffee-100 leading-relaxed font-medium">
+        Hot Dog, Hot Dog, Hot Diggity Dog! 48 hours of competitions, coding sprints, musical feasts, and desserts with Mickey &amp; the gang cheering you on!
       </p>
 
-      <!-- Highlights Pill Strip -->
-      <div class="pt-2 flex flex-wrap items-center justify-center gap-3 sm:gap-6 text-xs font-semibold text-amber-200/80">
-        <div class="flex items-center gap-1.5 bg-coffee-900/60 px-3 py-1 rounded-lg border border-coffee-800">
-          <span>☕</span> 4 Dark Roast Tech Sprints
+      <!-- Highlights Characters Pill Strip -->
+      <div class="pt-2 flex flex-wrap items-center justify-center gap-2.5 sm:gap-4 text-xs font-bold text-amber-100">
+        <div class="flex items-center gap-1.5 bg-coffee-900/80 px-3.5 py-1.5 rounded-full border border-amber-500/30">
+          <span>🐭</span> Mickey's Tech Sprints
         </div>
-        <div class="flex items-center gap-1.5 bg-coffee-900/60 px-3 py-1 rounded-lg border border-coffee-800">
-          <span>🍨</span> 5 Sweet Cultural Nights
+        <div class="flex items-center gap-1.5 bg-coffee-900/80 px-3.5 py-1.5 rounded-full border border-amber-500/30">
+          <span>🎀</span> Minnie's Sweet Arts
         </div>
-        <div class="flex items-center gap-1.5 bg-coffee-900/60 px-3 py-1 rounded-lg border border-coffee-800">
-          <span>⚡</span> 1,500+ Enthusiastic Scoopers
+        <div class="flex items-center gap-1.5 bg-coffee-900/80 px-3.5 py-1.5 rounded-full border border-amber-500/30">
+          <span>🦆</span> Donald's Gaming Arena
         </div>
-        <div class="flex items-center gap-1.5 bg-coffee-900/60 px-3 py-1 rounded-lg border border-coffee-800">
-          <span>🍫</span> 100% Free Campus Passes
+        <div class="flex items-center gap-1.5 bg-coffee-900/80 px-3.5 py-1.5 rounded-full border border-amber-500/30">
+          <span>💜</span> Daisy's Stage Nights
+        </div>
+        <div class="flex items-center gap-1.5 bg-coffee-900/80 px-3.5 py-1.5 rounded-full border border-amber-500/30">
+          <span>🐕</span> Goofy's Sports Fest
         </div>
       </div>
     </div>
@@ -231,7 +367,7 @@
           <input 
             type="text" 
             id="search-input" 
-            placeholder="Search treats, coding battles, music nights..." 
+            placeholder="Search Mickey's coding, Minnie's arts, music, esports..." 
             class="w-full pl-11 pr-10 py-3.5 rounded-2xl bg-white border-2 border-amber-200/80 focus:border-amber-500 focus:ring-4 focus:ring-amber-200/40 text-coffee-950 placeholder-coffee-400 font-medium text-sm transition outline-none shadow-sm"
           >
           <button 
@@ -245,18 +381,18 @@
 
         <!-- Event Counter -->
         <div class="flex items-center gap-2 self-end sm:self-center bg-white px-4 py-2.5 rounded-2xl border border-amber-200/70 shadow-sm text-xs font-bold text-coffee-800">
-          <span>🍨</span>
-          <span>Showing <span id="event-count-display" class="text-amber-600 font-extrabold text-sm">14</span> Delights</span>
+          <span>🎈</span>
+          <span>Showing <span id="event-count-display" class="text-amber-600 font-extrabold text-sm">14</span> Clubhouse Events</span>
         </div>
       </div>
 
-      <!-- Category Filter Tabs: Styled as Ice Cream Flavors -->
+      <!-- Category Filter Tabs: Styled with Characters -->
       <div class="flex flex-wrap items-center gap-2.5 pt-1">
         <button 
           data-category="All" 
           class="category-btn active px-4 py-2.5 rounded-2xl text-xs sm:text-sm font-bold transition flex items-center gap-1.5 shadow-sm active:scale-95 bg-coffee-900 text-butter-200 border-2 border-amber-500 butter-glow"
         >
-          <span>🍦</span>
+          <span>🐭</span>
           <span>All Scoops</span>
         </button>
 
@@ -272,8 +408,8 @@
           data-category="Cultural" 
           class="category-btn px-4 py-2.5 rounded-2xl text-xs sm:text-sm font-bold transition flex items-center gap-1.5 shadow-sm active:scale-95 bg-white text-coffee-800 hover:bg-amber-50 border border-amber-200"
         >
-          <span>🍨</span>
-          <span>Vanilla Culture</span>
+          <span>🎀</span>
+          <span>Minnie's Culture</span>
         </button>
 
         <button 
@@ -281,15 +417,15 @@
           class="category-btn px-4 py-2.5 rounded-2xl text-xs sm:text-sm font-bold transition flex items-center gap-1.5 shadow-sm active:scale-95 bg-white text-coffee-800 hover:bg-amber-50 border border-amber-200"
         >
           <span>⚡</span>
-          <span>Espresso Sports</span>
+          <span>Goofy's Sports</span>
         </button>
 
         <button 
           data-category="Gaming" 
           class="category-btn px-4 py-2.5 rounded-2xl text-xs sm:text-sm font-bold transition flex items-center gap-1.5 shadow-sm active:scale-95 bg-white text-coffee-800 hover:bg-amber-50 border border-amber-200"
         >
-          <span>🍫</span>
-          <span>Choco Gaming</span>
+          <span>🦆</span>
+          <span>Donald's Gaming</span>
         </button>
 
         <button 
@@ -297,7 +433,7 @@
           class="category-btn px-4 py-2.5 rounded-2xl text-xs sm:text-sm font-bold transition flex items-center gap-1.5 shadow-sm active:scale-95 bg-white text-coffee-800 hover:bg-amber-50 border border-amber-200"
         >
           <span>🧇</span>
-          <span>Waffle Workshop</span>
+          <span>Daisy's Workshop</span>
         </button>
       </div>
     </div>
@@ -305,30 +441,30 @@
     <!-- Loading State -->
     <div id="loading-state" class="hidden py-24 text-center">
       <div class="inline-block p-4 rounded-3xl bg-white border-2 border-amber-300 shadow-md animate-bounce mb-3 text-3xl">
-        🍨
+        🎈
       </div>
-      <h3 class="text-lg font-bold text-coffee-900">Brewing your fest menu...</h3>
-      <p class="text-xs text-coffee-500 mt-1">Churning fresh artisanal events</p>
+      <h3 class="text-lg font-bold text-coffee-900">Calling the Mousekedoer...</h3>
+      <p class="text-xs text-coffee-500 mt-1">Gathering your Clubhouse fest lineup!</p>
     </div>
 
     <!-- Error State -->
     <div id="error-state" class="hidden py-16 text-center max-w-md mx-auto p-8 rounded-3xl bg-red-50/90 border-2 border-red-200 shadow-md">
-      <div class="text-4xl mb-3">☕⚠️</div>
-      <h3 class="text-lg font-bold text-red-900">Unable to Brew Events</h3>
+      <div class="text-4xl mb-3">🦆⚠️</div>
+      <h3 class="text-lg font-bold text-red-900">Aw, Phooey! Connection Trouble</h3>
       <p id="error-message-text" class="text-xs text-red-700 mt-2 leading-relaxed">
         Could not connect to the backend server.
       </p>
       <button id="retry-btn" class="mt-4 px-5 py-2.5 rounded-xl bg-red-700 text-white font-bold text-xs hover:bg-red-800 transition shadow">
-        Retry Brew
+        Retry Connection
       </button>
     </div>
 
     <!-- Empty State -->
     <div id="empty-state" class="hidden py-20 text-center max-w-md mx-auto p-8 rounded-3xl bg-white border-2 border-amber-200 shadow-sm">
-      <div class="text-5xl mb-3">🍨🔍</div>
-      <h3 class="text-lg font-bold text-coffee-900">No Scoops Found</h3>
+      <div class="text-5xl mb-3">🐭🔍</div>
+      <h3 class="text-lg font-bold text-coffee-900">No Events Found</h3>
       <p class="text-xs text-coffee-500 mt-2 leading-relaxed">
-        We couldn't find any events matching your flavor filter or search term. Try another delicious keyword!
+        Gawrsh! We couldn't find any events matching this search. Try another fun keyword!
       </p>
       <button id="reset-filters-btn" class="mt-4 px-5 py-2 rounded-xl bg-coffee-800 text-butter-200 font-bold text-xs hover:bg-coffee-900 transition">
         Reset to All Scoops
@@ -340,6 +476,210 @@
       <!-- Injected by app.js -->
     </div>
   </main>
+
+  <!-- ======================================================== -->
+  <!-- MICKEY MOUSE CLUBHOUSE RUNNERS TRACK                     -->
+  <!-- Running characters: Mickey, Minnie, Donald, Daisy, Goofy  -->
+  <!-- ======================================================== -->
+  <div class="clubhouse-runner-track" aria-label="Mickey Mouse Clubhouse Animated Runners">
+    
+    <!-- 1. MICKEY MOUSE -->
+    <div class="clubhouse-runner-item runner-mickey" title="Click or hover to hear Mickey!">
+      <div class="speech-bubble mb-1 px-3 py-1 rounded-xl bg-white border-2 border-disney-red text-coffee-950 font-bold text-[11px] shadow-lg">
+        "Oh Boy! Welcome to Zenith '26! 🎈"
+      </div>
+      <div class="char-sprite flex items-center justify-center">
+        <svg width="64" height="74" viewBox="0 0 80 92" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Mickey Ears -->
+          <circle cx="20" cy="22" r="16" fill="#1A1A1A" />
+          <circle cx="60" cy="22" r="16" fill="#1A1A1A" />
+          <!-- Head Base -->
+          <circle cx="40" cy="38" r="22" fill="#1A1A1A" />
+          <!-- Face Peach Mask -->
+          <ellipse cx="40" cy="42" rx="16" ry="14" fill="#FFE0BD" />
+          <!-- Eyes -->
+          <ellipse cx="34" cy="38" rx="4" ry="7" fill="#FFFFFF" />
+          <ellipse cx="46" cy="38" rx="4" ry="7" fill="#FFFFFF" />
+          <ellipse cx="35.5" cy="38" rx="2" ry="4" fill="#1A1A1A" />
+          <ellipse cx="47.5" cy="38" rx="2" ry="4" fill="#1A1A1A" />
+          <!-- Nose -->
+          <ellipse cx="40" cy="45" rx="4.5" ry="3" fill="#1A1A1A" />
+          <!-- Cheerful Smile -->
+          <path d="M30 48 Q40 57 50 48" stroke="#1A1A1A" stroke-width="2.5" fill="none" stroke-linecap="round" />
+          <path d="M36 51 Q40 55 44 51" fill="#E52521" />
+          <!-- Torso -->
+          <rect x="32" y="58" width="16" height="14" rx="4" fill="#1A1A1A" />
+          <!-- Red Shorts with White Buttons -->
+          <rect x="28" y="66" width="24" height="12" rx="4" fill="#E52521" />
+          <ellipse cx="34" cy="71" rx="2.5" ry="3.5" fill="#FFFFFF" />
+          <ellipse cx="46" cy="71" rx="2.5" ry="3.5" fill="#FFFFFF" />
+          <!-- Running Gloves -->
+          <circle cx="22" cy="62" r="6" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1" />
+          <circle cx="58" cy="60" r="6" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1" />
+          <!-- Big Yellow Running Shoes -->
+          <ellipse cx="26" cy="85" rx="12" ry="7" fill="#FFCC00" stroke="#E6B800" stroke-width="1" />
+          <ellipse cx="54" cy="83" rx="12" ry="7" fill="#FFCC00" stroke="#E6B800" stroke-width="1" />
+        </svg>
+      </div>
+      <div class="dust-puff text-xs opacity-60">💨</div>
+    </div>
+
+    <!-- 2. MINNIE MOUSE -->
+    <div class="clubhouse-runner-item runner-minnie" title="Click or hover to hear Minnie!">
+      <div class="speech-bubble mb-1 px-3 py-1 rounded-xl bg-white border-2 border-pink-500 text-coffee-950 font-bold text-[11px] shadow-lg">
+        "Yoo-Hoo! Sweet fest treats! 🎀"
+      </div>
+      <div class="char-sprite flex items-center justify-center">
+        <svg width="66" height="78" viewBox="0 0 80 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Ears -->
+          <circle cx="20" cy="24" r="16" fill="#1A1A1A" />
+          <circle cx="60" cy="24" r="16" fill="#1A1A1A" />
+          <!-- Iconic Red Polka Dot Bow -->
+          <path d="M26 14 Q40 22 34 28 Q40 24 46 28 Q40 22 54 14 Q40 10 26 14 Z" fill="#E52521" />
+          <circle cx="40" cy="20" r="5" fill="#E52521" />
+          <circle cx="32" cy="16" r="1.8" fill="#FFFFFF" />
+          <circle cx="48" cy="16" r="1.8" fill="#FFFFFF" />
+          <!-- Head Base -->
+          <circle cx="40" cy="40" r="21" fill="#1A1A1A" />
+          <!-- Face Peach Mask -->
+          <ellipse cx="40" cy="44" rx="15" ry="13" fill="#FFE0BD" />
+          <!-- Eyelashes & Eyes -->
+          <path d="M30 33 L32 36 M48 36 L50 33" stroke="#1A1A1A" stroke-width="2" stroke-linecap="round" />
+          <ellipse cx="34" cy="40" rx="3.5" ry="6.5" fill="#FFFFFF" />
+          <ellipse cx="46" cy="40" rx="3.5" ry="6.5" fill="#FFFFFF" />
+          <ellipse cx="35.5" cy="40" rx="2" ry="4" fill="#1A1A1A" />
+          <ellipse cx="47.5" cy="40" rx="2" ry="4" fill="#1A1A1A" />
+          <!-- Nose & Smile -->
+          <ellipse cx="40" cy="47" rx="4" ry="2.5" fill="#1A1A1A" />
+          <path d="M31 50 Q40 58 49 50" stroke="#1A1A1A" stroke-width="2.5" fill="none" stroke-linecap="round" />
+          <!-- Red Polka Dot Dress -->
+          <path d="M31 62 L22 76 L58 76 L49 62 Z" fill="#E52521" />
+          <circle cx="28" cy="70" r="1.8" fill="#FFFFFF" />
+          <circle cx="38" cy="68" r="1.8" fill="#FFFFFF" />
+          <circle cx="48" cy="71" r="1.8" fill="#FFFFFF" />
+          <circle cx="34" cy="74" r="1.8" fill="#FFFFFF" />
+          <circle cx="44" cy="74" r="1.8" fill="#FFFFFF" />
+          <!-- Gloves -->
+          <circle cx="20" cy="65" r="5.5" fill="#FFFFFF" />
+          <circle cx="60" cy="63" r="5.5" fill="#FFFFFF" />
+          <!-- Yellow High Heel Running Shoes -->
+          <ellipse cx="26" cy="87" rx="10" ry="6" fill="#FFCC00" stroke="#E6B800" stroke-width="1" />
+          <ellipse cx="54" cy="85" rx="10" ry="6" fill="#FFCC00" stroke="#E6B800" stroke-width="1" />
+        </svg>
+      </div>
+      <div class="dust-puff text-xs opacity-60">💨</div>
+    </div>
+
+    <!-- 3. DONALD DUCK -->
+    <div class="clubhouse-runner-item runner-donald" title="Click or hover to hear Donald!">
+      <div class="speech-bubble mb-1 px-3 py-1 rounded-xl bg-white border-2 border-disney-blue text-coffee-950 font-bold text-[11px] shadow-lg">
+        "Aw, Phooey! Let's Go! 🦆"
+      </div>
+      <div class="char-sprite flex items-center justify-center">
+        <svg width="66" height="76" viewBox="0 0 80 94" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Sailor Cap & Black Ribbon -->
+          <path d="M46 12 Q58 8 68 14 Q58 12 48 18" stroke="#1A1A1A" stroke-width="2.5" fill="none" />
+          <ellipse cx="40" cy="18" rx="16" ry="6" fill="#1976D2" />
+          <ellipse cx="40" cy="16" rx="12" ry="5" fill="#2196F3" />
+          <circle cx="40" cy="13" r="2.5" fill="#1A1A1A" />
+          <!-- White Duck Head -->
+          <circle cx="40" cy="34" r="19" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="1" />
+          <!-- Blue Duck Eyes -->
+          <ellipse cx="34" cy="30" rx="3.5" ry="6" fill="#FFFFFF" stroke="#BDBDBD" stroke-width="0.5" />
+          <ellipse cx="44" cy="30" rx="3.5" ry="6" fill="#FFFFFF" stroke="#BDBDBD" stroke-width="0.5" />
+          <ellipse cx="35" cy="30" rx="1.8" ry="3.5" fill="#1976D2" />
+          <ellipse cx="45" cy="30" rx="1.8" ry="3.5" fill="#1976D2" />
+          <!-- Wide Orange Bill (Beak) with Happy Quack -->
+          <path d="M26 38 Q40 33 54 38 Q56 46 40 48 Q24 46 26 38 Z" fill="#FF9800" stroke="#F57C00" stroke-width="1" />
+          <path d="M30 42 Q40 46 50 42" stroke="#D84315" stroke-width="2" fill="none" />
+          <ellipse cx="40" cy="44" rx="4" ry="2" fill="#E53935" />
+          <!-- Blue Sailor Shirt & Red Bowtie -->
+          <path d="M30 52 L22 68 L58 68 L50 52 Z" fill="#1976D2" />
+          <path d="M33 52 L40 58 L47 52" stroke="#FFEB3B" stroke-width="2.5" fill="none" />
+          <!-- Red Bow -->
+          <path d="M34 55 Q40 58 36 62 Q40 58 44 62 Q40 58 46 55 Z" fill="#E52521" />
+          <!-- White Feather Tail -->
+          <path d="M52 64 Q62 62 60 70 Z" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="1" />
+          <!-- Orange Webbed Running Feet -->
+          <ellipse cx="28" cy="84" rx="13" ry="6" fill="#FF9800" stroke="#F57C00" stroke-width="1" />
+          <ellipse cx="52" cy="82" rx="13" ry="6" fill="#FF9800" stroke="#F57C00" stroke-width="1" />
+        </svg>
+      </div>
+      <div class="dust-puff text-xs opacity-60">💨</div>
+    </div>
+
+    <!-- 4. DAISY DUCK -->
+    <div class="clubhouse-runner-item runner-daisy" title="Click or hover to hear Daisy!">
+      <div class="speech-bubble mb-1 px-3 py-1 rounded-xl bg-white border-2 border-purple-500 text-coffee-950 font-bold text-[11px] shadow-lg">
+        "Simply fabulous! 💜"
+      </div>
+      <div class="char-sprite flex items-center justify-center">
+        <svg width="66" height="78" viewBox="0 0 80 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Big Lavender Bow -->
+          <path d="M26 12 Q40 20 34 26 Q40 22 46 26 Q40 20 54 12 Q40 8 26 12 Z" fill="#AB47BC" />
+          <circle cx="40" cy="18" r="5" fill="#8E24AA" />
+          <!-- White Head with Eyelashes -->
+          <circle cx="40" cy="38" r="19" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="1" />
+          <path d="M28 31 L31 34 M49 34 L52 31" stroke="#4A148C" stroke-width="2" stroke-linecap="round" />
+          <ellipse cx="34" cy="36" rx="3.5" ry="6" fill="#FFFFFF" />
+          <ellipse cx="46" cy="36" rx="3.5" ry="6" fill="#FFFFFF" />
+          <ellipse cx="35" cy="36" rx="1.8" ry="3.5" fill="#4A148C" />
+          <ellipse cx="47" cy="36" rx="1.8" ry="3.5" fill="#4A148C" />
+          <!-- Bill -->
+          <path d="M26 44 Q40 39 54 44 Q56 50 40 52 Q24 50 26 44 Z" fill="#FF9800" />
+          <!-- Lavender Blouse -->
+          <path d="M30 58 L23 72 L57 72 L50 58 Z" fill="#CE93D8" />
+          <!-- Teal Bangle on Wrist -->
+          <ellipse cx="22" cy="65" rx="3.5" ry="2" fill="#26A69A" />
+          <!-- Pink / Purple Shoes -->
+          <ellipse cx="28" cy="87" rx="11" ry="6" fill="#E91E63" stroke="#C2185B" stroke-width="1" />
+          <ellipse cx="52" cy="85" rx="11" ry="6" fill="#E91E63" stroke="#C2185B" stroke-width="1" />
+        </svg>
+      </div>
+      <div class="dust-puff text-xs opacity-60">💨</div>
+    </div>
+
+    <!-- 5. GOOFY -->
+    <div class="clubhouse-runner-item runner-goofy" title="Click or hover to hear Goofy!">
+      <div class="speech-bubble mb-1 px-3 py-1 rounded-xl bg-white border-2 border-emerald-600 text-coffee-950 font-bold text-[11px] shadow-lg">
+        "Gawrsh! Hot dog, hot diggity dog! 🐕"
+      </div>
+      <div class="char-sprite flex items-center justify-center">
+        <svg width="70" height="92" viewBox="0 0 85 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Tall Green Crumpled Hat with Black Band -->
+          <path d="M36 8 Q43 2 50 8 Q47 16 52 24 L34 24 Z" fill="#4CAF50" stroke="#388E3C" stroke-width="1" />
+          <rect x="32" y="24" width="22" height="4" fill="#212121" />
+          <!-- Floppy Black Dog Ears Swaying -->
+          <path d="M26 28 C16 32 10 46 14 62 C16 66 22 66 22 58 C22 48 26 38 30 34" fill="#1A1A1A" />
+          <path d="M58 28 C68 32 74 46 70 62 C68 66 62 66 62 58 C62 48 58 38 54 34" fill="#1A1A1A" />
+          <!-- Black Head Base -->
+          <ellipse cx="42" cy="34" rx="14" ry="12" fill="#1A1A1A" />
+          <!-- Goofy Cartoon Eyes -->
+          <ellipse cx="38" cy="28" rx="3.5" ry="7" fill="#FFFFFF" />
+          <ellipse cx="46" cy="28" rx="3.5" ry="7" fill="#FFFFFF" />
+          <circle cx="39" cy="28" r="2" fill="#1A1A1A" />
+          <circle cx="47" cy="28" r="2" fill="#1A1A1A" />
+          <!-- Long Muzzle Snout -->
+          <ellipse cx="42" cy="42" rx="16" ry="10" fill="#D7CCC8" stroke="#8D6E63" stroke-width="1" />
+          <ellipse cx="42" cy="37" rx="5" ry="3.5" fill="#1A1A1A" />
+          <!-- Buck Teeth Smile -->
+          <path d="M32 46 Q42 54 52 46" stroke="#1A1A1A" stroke-width="2.5" fill="none" stroke-linecap="round" />
+          <rect x="39" y="47" width="3" height="4" fill="#FFFFFF" stroke="#1A1A1A" stroke-width="0.5" />
+          <rect x="42" y="47" width="3" height="4" fill="#FFFFFF" stroke="#1A1A1A" stroke-width="0.5" />
+          <!-- Orange Turtleneck Sweater & Black Vest -->
+          <rect x="33" y="52" width="18" height="24" rx="4" fill="#FF5722" />
+          <path d="M33 54 L38 76 L33 76 Z M51 54 L46 76 L51 76 Z" fill="#212121" />
+          <!-- Blue Pants -->
+          <rect x="33" y="76" width="18" height="14" rx="2" fill="#1976D2" />
+          <!-- Long Brown Clown Running Shoes -->
+          <ellipse cx="26" cy="98" rx="15" ry="7" fill="#5D4037" stroke="#3E2723" stroke-width="1" />
+          <ellipse cx="58" cy="96" rx="15" ry="7" fill="#5D4037" stroke="#3E2723" stroke-width="1" />
+        </svg>
+      </div>
+      <div class="dust-puff text-xs opacity-60">💨</div>
+    </div>
+
+  </div>
 
   <!-- Event Detail & Registration Modal -->
   <div id="detail-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-coffee-950/70 backdrop-blur-sm overflow-y-auto">
@@ -471,7 +811,7 @@
             <div id="form-success-alert" class="hidden p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-xs text-emerald-800 space-y-1">
               <div class="font-bold flex items-center gap-1.5 text-sm">
                 <span>🎉</span>
-                <span>Order Confirmed! Your Pass is Baked!</span>
+                <span>Hot Dog! Your Clubhouse Pass is Baked!</span>
               </div>
               <p id="form-success-text" class="text-emerald-700">Registration confirmed successfully.</p>
             </div>
@@ -504,12 +844,12 @@
   <footer class="bg-coffee-950 border-t-2 border-amber-600/30 text-amber-200/80 text-xs py-8 mt-auto">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-center sm:text-left">
       <div class="flex items-center gap-2 text-butter-200 font-bold">
-        <span>🍨 Zenith '26</span>
+        <span>🏰 Zenith '26</span>
         <span>•</span>
-        <span class="text-amber-200/60 font-medium">Butter &amp; Coffee Culinary Fest Experience</span>
+        <span class="text-amber-200/60 font-medium">Mickey Mouse Clubhouse &amp; Dessert Fest Experience</span>
       </div>
       <div class="text-coffee-300">
-        Crafted with FastAPI, SQLite &amp; Tailwind CSS · 
+        "Hot Dog, Hot Dog, Hot Diggity Dog!" · 
         <a href="/admin.html" class="text-butter-300 font-bold hover:underline">Coordinator Lounge →</a>
       </div>
     </div>

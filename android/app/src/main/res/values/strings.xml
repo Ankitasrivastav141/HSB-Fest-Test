@@ -9,4 +9,9 @@
     <string name="clear">Clear</string>
     <string name="retry">Retry Brew ☕</string>
     <string name="reset_filters">Reset to All Scoops</string>
+    <string name="clubhouse_mickey">🐭 Mickey: "Oh Boy! Welcome to Zenith \'26! 🎈"</string>
+    <string name="clubhouse_minnie">🎀 Minnie: "Yoo-Hoo! Sweet fest treats! 🎀"</string>
+    <string name="clubhouse_donald">🦆 Donald: "Aw, Phooey! Let\'s Go! 🦆"</string>
+    <string name="clubhouse_daisy">💜 Daisy: "Simply fabulous! 💜"</string>
+    <string name="clubhouse_goofy">🐕 Goofy: "Gawrsh! Hot dog, hot diggity dog! 🐕"</string>
 </resources>
