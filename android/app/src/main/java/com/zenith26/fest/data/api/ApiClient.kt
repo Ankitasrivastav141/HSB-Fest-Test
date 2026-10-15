@@ -17,7 +17,7 @@ object ApiClient {
     private const val KEY_BASE_URL = "base_url"
 
     // Public live tunnel URL for cloud emulators (Appetize.io) and remote devices
-    const val DEFAULT_BASE_URL = "https://mailman-enclosed-makes-suggested.trycloudflare.com/"
+    const val DEFAULT_BASE_URL = "https://meaningful-interior-practical-paragraph.trycloudflare.com/"
 
     private var currentBaseUrl: String = DEFAULT_BASE_URL
     private var retrofit: Retrofit? = null
