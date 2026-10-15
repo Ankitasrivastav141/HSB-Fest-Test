@@ -4,7 +4,7 @@ from datetime import datetime, date
 from pathlib import Path
 from typing import List, Optional, Dict
 
-from fastapi import FastAPI, HTTPException, Query, status
+from fastapi import FastAPI, HTTPException, Query, status, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
@@ -426,9 +426,26 @@ def delete_registration(registration_id: int):
     }
 
 
+# Alias routes without /api prefix to support serverless runtimes that strip mount prefixes
+app.add_api_route("/events", get_events, methods=["GET"], response_model=List[EventOut], include_in_schema=False)
+app.add_api_route("/events/{event_id}", get_event_detail, methods=["GET"], response_model=EventDetail, include_in_schema=False)
+app.add_api_route("/events/{event_id}/register", register_for_event, methods=["POST"], status_code=status.HTTP_201_CREATED, include_in_schema=False)
+app.add_api_route("/registrations", get_registrations, methods=["GET"], response_model=List[RegistrationDetailOut], include_in_schema=False)
+app.add_api_route("/registrations/{registration_id}", delete_registration, methods=["DELETE"], status_code=status.HTTP_200_OK, include_in_schema=False)
+app.add_api_route("/stats", get_stats, methods=["GET"], response_model=StatsOut, include_in_schema=False)
+
+@app.get("/api/debug", include_in_schema=False)
+@app.get("/debug", include_in_schema=False)
+def debug_info(request: Request):
+    return {
+        "scope_path": request.scope.get("path"),
+        "headers": dict(request.headers)
+    }
+
 # ---------------------------------------------------------
 # Static File Mounting (Step 4)
 # ---------------------------------------------------------
+
 
 @app.get("/", response_class=FileResponse)
 def serve_root():
