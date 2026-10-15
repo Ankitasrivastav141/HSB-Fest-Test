@@ -16,8 +16,8 @@ object ApiClient {
     private const val PREFS_NAME = "zenith_settings"
     private const val KEY_BASE_URL = "base_url"
 
-    // Public live tunnel URL for cloud emulators (Appetize.io) and remote devices
-    const val DEFAULT_BASE_URL = "https://meaningful-interior-practical-paragraph.trycloudflare.com/"
+    // Public live cloud backend URL on Vercel
+    const val DEFAULT_BASE_URL = "https://hsb-fest-test-5459.vercel.app/"
 
     private var currentBaseUrl: String = DEFAULT_BASE_URL
     private var retrofit: Retrofit? = null

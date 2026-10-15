@@ -74,6 +74,13 @@ def seed_events():
         """, (event_id, title, category, description, event_date, event_time, venue, capacity, fee, icon))
         inserted_count += 1
 
+    try:
+        from backend.database import is_postgres
+        if is_postgres():
+            cursor.execute("SELECT setval(pg_get_serial_sequence('events', 'id'), COALESCE(MAX(id), 1)) FROM events;")
+    except Exception:
+        pass
+
     conn.commit()
     conn.close()
     print(f"Successfully seeded {inserted_count} events from {SEED_FILE_PATH.name}.")
