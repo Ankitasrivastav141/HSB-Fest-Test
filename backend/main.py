@@ -7,7 +7,7 @@ from typing import List, Optional, Dict
 from fastapi import FastAPI, HTTPException, Query, status, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse, JSONResponse
 
 from backend.database import get_db_connection, init_db
 from backend.models import (
@@ -35,6 +35,39 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+@app.middleware("http")
+async def vercel_url_rewrite_middleware(request: Request, call_next):
+    # 1. Check if Vercel passed _path in query parameters
+    subpath = request.query_params.get("_path")
+    if subpath:
+        clean = subpath.lstrip("/")
+        request.scope["path"] = f"/api/{clean}"
+    else:
+        # 2. Check headers
+        matched = request.headers.get("x-matched-path") or request.headers.get("x-forwarded-uri")
+        if matched and not matched.startswith("/api/index"):
+            request.scope["path"] = matched
+        elif request.scope.get("path", "") in ("/events", "/stats", "/registrations") or request.scope.get("path", "").startswith("/events/"):
+            request.scope["path"] = "/api" + request.scope.get("path", "")
+
+    response = await call_next(request)
+    return response
+
+@app.exception_handler(404)
+async def custom_404_handler(request: Request, exc):
+    return JSONResponse(
+        status_code=404,
+        content={
+            "detail": "Not Found",
+            "received_url_path": request.url.path,
+            "received_scope_path": request.scope.get("path"),
+            "x_matched_path": request.headers.get("x-matched-path"),
+            "headers": dict(request.headers),
+        }
+    )
+
+
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 FRONTEND_DIR = BASE_DIR / "frontend"
