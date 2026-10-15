@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp"
+    android:background="@drawable/bg_card"
+    android:orientation="vertical"
+    android:padding="12dp">
+
+    <!-- Top line: ID, Student Name, Cancel Button -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/reg_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="monospace"
+            android:text="#1"
+            android:textColor="@color/slate_400"
+            android:textSize="11sp" />
+
+        <TextView
+            android:id="@+id/reg_student_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:text="Rahul Sharma"
+            android:textColor="@color/slate_900"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/btn_cancel_reg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_badge_full"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="4dp"
+            android:text="Cancel"
+            android:textColor="@color/red_700"
+            android:textSize="10sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <!-- Event Title Badge -->
+    <TextView
+        android:id="@+id/reg_event_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:background="@drawable/bg_pill_badge"
+        android:paddingHorizontal="8dp"
+        android:paddingVertical="2dp"
+        android:text="Code Sprint 2.0"
+        android:textColor="@color/brand_700"
+        android:textSize="10sp"
+        android:textStyle="bold" />
+
+    <!-- Details: Roll No, Email, Phone -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/reg_roll_number"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="monospace"
+                android:text="Roll: 2026CS101"
+                android:textColor="@color/slate_600"
+                android:textSize="11sp" />
+
+            <TextView
+                android:id="@+id/reg_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="📞 9876543210"
+                android:textColor="@color/slate_500"
+                android:textSize="11sp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/reg_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="✉️ rahul@college.edu"
+            android:textColor="@color/slate_600"
+            android:textSize="11sp" />
+
+        <TextView
+            android:id="@+id/reg_registered_at"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="Registered: 2026-11-14 10:30"
+            android:textColor="@color/slate_400"
+            android:textSize="10sp" />
+    </LinearLayout>
+</LinearLayout>

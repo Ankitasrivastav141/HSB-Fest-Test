@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Zenith \'26</string>
+    <string name="title_fest_portal">Fest Portal</string>
+    <string name="title_admin_dashboard">Coordinator Dashboard</string>
+    <string name="hero_dates">📅 November 14–15, 2026 • Campus Grounds &amp; Auditoriums</string>
+    <string name="hero_headline">Ignite Your Spark at Zenith \'26</string>
+    <string name="hero_subtext">Join over 1,500 students in 48 hours of competitions, tech sprints, live music, creative arts, and esports. Browse events below and secure your spot today!</string>
+    <string name="search_hint">Search events by title...</string>
+    <string name="clear">Clear</string>
+    <string name="retry">Retry Connection</string>
+    <string name="reset_filters">Reset All Filters</string>
+</resources>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="3dp"
+    android:background="@drawable/bg_badge_seats"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="8dp">
+
+    <TextView
+        android:id="@+id/cat_stat_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="💻"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/cat_stat_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:text="Technical"
+        android:textColor="@color/slate_600"
+        android:textSize="10sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/cat_stat_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="4 events"
+        android:textColor="@color/slate_900"
+        android:textSize="11sp"
+        android:textStyle="bold" />
+</LinearLayout>
