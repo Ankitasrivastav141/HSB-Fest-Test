@@ -53,12 +53,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const submitBtnText = document.getElementById("submit-btn-text");
 
   // Category Color Helper
+  // Category Color Helper (Ice Cream & Coffee Theme)
   const categoryStyles = {
-    Technical: { badge: "bg-blue-50 text-blue-700 border-blue-200" },
-    Cultural: { badge: "bg-purple-50 text-purple-700 border-purple-200" },
-    Sports: { badge: "bg-emerald-50 text-emerald-700 border-emerald-200" },
-    Gaming: { badge: "bg-rose-50 text-rose-700 border-rose-200" },
-    Workshop: { badge: "bg-amber-50 text-amber-700 border-amber-200" }
+    Technical: { badge: "bg-amber-100/90 text-amber-950 border-amber-300", label: "☕ Dark Roast Tech" },
+    Cultural: { badge: "bg-pink-100/90 text-pink-950 border-pink-300", label: "🍨 Vanilla Culture" },
+    Sports: { badge: "bg-emerald-100/90 text-emerald-950 border-emerald-300", label: "⚡ Espresso Sports" },
+    Gaming: { badge: "bg-purple-100/90 text-purple-950 border-purple-300", label: "🍫 Choco Gaming" },
+    Workshop: { badge: "bg-yellow-100/90 text-amber-950 border-amber-400", label: "🧇 Waffle Workshop" }
   };
 
   /**
@@ -113,63 +114,63 @@ document.addEventListener("DOMContentLoaded", () => {
 
     events.forEach(event => {
       const card = document.createElement("div");
-      card.className = "bg-white rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-xl hover:-translate-y-1 transition duration-200 flex flex-col overflow-hidden animate-fade-in group";
+      card.className = "bg-white rounded-3xl border-2 border-amber-200/80 creamy-card flex flex-col overflow-hidden animate-fade-in group";
 
-      const catStyle = categoryStyles[event.category] || { badge: "bg-slate-100 text-slate-700 border-slate-200" };
+      const catStyle = categoryStyles[event.category] || { badge: "bg-amber-50 text-coffee-800 border-amber-200", label: event.category };
       const isFull = event.available_seats <= 0;
-      const feeLabel = event.fee > 0 ? `₹${event.fee}` : "Free";
+      const feeLabel = event.fee > 0 ? `🍫 ₹${event.fee} Treat` : "✨ Free Scoop";
 
       card.innerHTML = `
         <div class="p-6 flex-grow flex flex-col justify-between space-y-4">
           <!-- Card Header: Icon, Category & Seats Badge -->
           <div class="flex items-start justify-between gap-3">
-            <div class="w-12 h-12 rounded-2xl bg-slate-50 border border-slate-100 flex items-center justify-center text-2xl shadow-inner group-hover:scale-105 transition">
-              ${event.icon || "⚡"}
+            <div class="w-13 h-13 rounded-2xl bg-gradient-to-br from-amber-50 to-amber-100 border border-amber-200/80 flex items-center justify-center text-2xl shadow-inner group-hover:scale-110 group-hover:rotate-6 transition duration-300">
+              ${event.icon || "🍨"}
             </div>
-            <div class="flex flex-col items-end gap-1">
-              <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full border ${catStyle.badge}">
-                ${event.category}
+            <div class="flex flex-col items-end gap-1.5">
+              <span class="text-[11px] font-extrabold px-3 py-1 rounded-full border shadow-xs ${catStyle.badge}">
+                ${catStyle.label || event.category}
               </span>
               ${isFull 
-                ? `<span class="text-xs font-bold px-2.5 py-0.5 rounded-full bg-red-100 text-red-700 border border-red-200 uppercase tracking-wider">FULL</span>`
-                : `<span class="text-xs font-medium text-slate-500 bg-slate-50 px-2 py-0.5 rounded-md border border-slate-100">${event.available_seats} / ${event.capacity} left</span>`
+                ? `<span class="text-[10px] font-black px-2.5 py-0.5 rounded-full bg-coffee-950 text-amber-200 border border-amber-600/50 uppercase tracking-wider">🍫 SOLD OUT</span>`
+                : `<span class="text-[11px] font-semibold text-coffee-700 bg-amber-50/80 px-2.5 py-0.5 rounded-md border border-amber-200">🍨 ${event.available_seats} / ${event.capacity} scoops left</span>`
               }
             </div>
           </div>
 
           <!-- Title & Brief Description -->
-          <div class="space-y-1">
-            <h3 class="text-lg font-bold text-slate-900 group-hover:text-indigo-600 transition leading-snug">
+          <div class="space-y-1.5">
+            <h3 class="text-lg font-bold text-coffee-950 font-display group-hover:text-amber-700 transition leading-snug">
               ${escapeHtml(event.title)}
             </h3>
-            <p class="text-xs text-slate-500 line-clamp-2 leading-relaxed">
-              ${escapeHtml(event.description || "Join this exciting fest event at Zenith '26.")}
+            <p class="text-xs text-coffee-600 line-clamp-2 leading-relaxed">
+              ${escapeHtml(event.description || "Join this decadent campus fest experience at Zenith '26.")}
             </p>
           </div>
 
           <!-- Logistics: Date, Time, Venue -->
-          <div class="space-y-1.5 pt-2 border-t border-slate-100 text-xs text-slate-600">
+          <div class="space-y-1.5 pt-3 border-t border-amber-100 text-xs text-coffee-700">
             <div class="flex items-center gap-2">
-              <span class="text-slate-400">📅</span>
-              <span>${event.event_date} · ${event.event_time}</span>
+              <span>📅</span>
+              <span class="font-medium">${event.event_date} · ${event.event_time}</span>
             </div>
             <div class="flex items-center gap-2">
-              <span class="text-slate-400">📍</span>
-              <span class="truncate">${escapeHtml(event.venue)}</span>
+              <span>📍</span>
+              <span class="font-medium truncate">${escapeHtml(event.venue)}</span>
             </div>
           </div>
         </div>
 
         <!-- Card Footer: Fee and Action Button -->
-        <div class="px-6 py-3.5 bg-slate-50 border-t border-slate-100 flex items-center justify-between">
-          <div class="text-xs font-bold ${event.fee > 0 ? 'text-indigo-600' : 'text-emerald-600'}">
+        <div class="px-6 py-4 bg-[#fffdf8] border-t-2 border-amber-100 flex items-center justify-between">
+          <div class="text-xs font-black ${event.fee > 0 ? 'text-coffee-900' : 'text-amber-700'}">
             ${feeLabel}
           </div>
           <button 
             data-event-id="${event.id}" 
-            class="view-details-btn px-4 py-2 rounded-xl text-xs font-semibold text-white ${isFull ? 'bg-slate-700 hover:bg-slate-800' : 'bg-indigo-600 hover:bg-indigo-700 shadow-sm shadow-indigo-200'} transition active:scale-95 flex items-center gap-1"
+            class="view-details-btn px-4 py-2.5 rounded-2xl text-xs font-bold ${isFull ? 'bg-coffee-900 hover:bg-coffee-800 text-amber-200' : 'bg-gradient-to-r from-butter-300 via-butter-400 to-amber-500 hover:from-butter-200 hover:to-amber-400 text-coffee-950 shadow-md shadow-amber-900/10'} transition active:scale-95 flex items-center gap-1.5"
           >
-            <span>${isFull ? 'View Event' : 'View & Register'}</span>
+            <span>${isFull ? 'View Scoop' : 'Taste & Reserve'}</span>
             <span>→</span>
           </button>
         </div>
@@ -357,12 +358,12 @@ document.addEventListener("DOMContentLoaded", () => {
   categoryButtons.forEach(btn => {
     btn.addEventListener("click", () => {
       categoryButtons.forEach(b => {
-        b.classList.remove("bg-indigo-600", "text-white", "shadow-indigo-200");
-        b.classList.add("bg-white", "text-slate-700", "border-slate-200");
+        b.classList.remove("bg-coffee-900", "text-butter-200", "border-2", "border-amber-500", "butter-glow");
+        b.classList.add("bg-white", "text-coffee-800", "border", "border-amber-200");
       });
 
-      btn.classList.remove("bg-white", "text-slate-700", "border-slate-200");
-      btn.classList.add("bg-indigo-600", "text-white", "shadow-indigo-200");
+      btn.classList.remove("bg-white", "text-coffee-800", "border", "border-amber-200");
+      btn.classList.add("bg-coffee-900", "text-butter-200", "border-2", "border-amber-500", "butter-glow");
 
       currentCategory = btn.getAttribute("data-category");
       fetchEvents();
@@ -401,11 +402,11 @@ document.addEventListener("DOMContentLoaded", () => {
     currentCategory = "All";
     categoryButtons.forEach(b => {
       if (b.getAttribute("data-category") === "All") {
-        b.classList.remove("bg-white", "text-slate-700", "border-slate-200");
-        b.classList.add("bg-indigo-600", "text-white", "shadow-indigo-200");
+        b.classList.remove("bg-white", "text-coffee-800", "border", "border-amber-200");
+        b.classList.add("bg-coffee-900", "text-butter-200", "border-2", "border-amber-500", "butter-glow");
       } else {
-        b.classList.remove("bg-indigo-600", "text-white", "shadow-indigo-200");
-        b.classList.add("bg-white", "text-slate-700", "border-slate-200");
+        b.classList.remove("bg-coffee-900", "text-butter-200", "border-2", "border-amber-500", "butter-glow");
+        b.classList.add("bg-white", "text-coffee-800", "border", "border-amber-200");
       }
     });
     fetchEvents();

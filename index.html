@@ -3,347 +3,514 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Zenith '26 — Annual College Fest Portal</title>
+  <title>Zenith '26 — The Sweetest College Fest 🍦☕🍫</title>
   <!-- Favicon as inline SVG -->
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍨</text></svg>">
   
-  <!-- Tailwind CSS via Play CDN (for classroom prototyping; production applications use a compiled CSS build) -->
+  <!-- Tailwind CSS via Play CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet">
+
   <script>
     tailwind.config = {
       theme: {
         extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            display: ['"Playfair Display"', 'serif'],
+          },
           colors: {
-            brand: {
-              50: '#eef2ff',
-              100: '#e0e7ff',
-              500: '#6366f1',
-              600: '#4f46e5',
-              700: '#4338ca',
-              900: '#312e81',
+            butter: {
+              50: '#fffef5',
+              100: '#fef9c3',
+              200: '#fef08a',
+              300: '#fde047',
+              400: '#facc15',
+              500: '#eab308',
+              600: '#ca8a04',
+            },
+            coffee: {
+              50: '#faf6f0',
+              100: '#f5ebe0',
+              200: '#e6ccb2',
+              300: '#ddb892',
+              400: '#b08968',
+              500: '#7f5539',
+              600: '#6f4831',
+              700: '#4a3022',
+              800: '#382319',
+              900: '#211510',
+              950: '#140c09',
+            },
+            choco: {
+              light: '#8d5b4c',
+              DEFAULT: '#4a2810',
+              dark: '#2d180a',
+              syrup: '#1a0d05',
+              caramel: '#d97706',
             }
           },
           animation: {
-            'fade-in': 'fadeIn 0.3s ease-out forwards',
+            'float-slow': 'floatSlow 6s ease-in-out infinite',
+            'float-delay': 'floatSlow 7s ease-in-out 2s infinite',
+            'float-fast': 'floatSlow 5s ease-in-out 1s infinite',
+            'pop': 'pop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+            'fade-in': 'fadeIn 0.35s ease-out forwards',
+            'shimmer': 'shimmer 2.5s infinite linear',
           },
           keyframes: {
+            floatSlow: {
+              '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
+              '50%': { transform: 'translateY(-12px) rotate(3deg)' },
+            },
+            pop: {
+              '0%': { transform: 'scale(0.96)' },
+              '50%': { transform: 'scale(1.02)' },
+              '100%': { transform: 'scale(1)' },
+            },
             fadeIn: {
-              '0%': { opacity: 0, transform: 'translateY(6px)' },
-              '100%': { opacity: 1, transform: 'translateY(0)' },
+              '0%': { opacity: '0', transform: 'translateY(8px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
+            },
+            shimmer: {
+              '0%': { backgroundPosition: '-200% 0' },
+              '100%': { backgroundPosition: '200% 0' },
             }
           }
         }
       }
     }
   </script>
+
+  <style>
+    /* Waffle Cone pattern overlay */
+    .waffle-pattern {
+      background-color: #211510;
+      background-image: 
+        radial-gradient(circle at 50% 50%, rgba(245, 194, 73, 0.08) 2px, transparent 2px),
+        linear-gradient(45deg, transparent 48%, rgba(245, 194, 73, 0.04) 49%, rgba(245, 194, 73, 0.04) 51%, transparent 52%),
+        linear-gradient(-45deg, transparent 48%, rgba(245, 194, 73, 0.04) 49%, rgba(245, 194, 73, 0.04) 51%, transparent 52%);
+      background-size: 32px 32px, 24px 24px, 24px 24px;
+    }
+    
+    /* Chocolate Drip divider */
+    .choco-drip {
+      background: radial-gradient(circle at 10px -5px, transparent 12px, #211510 13px);
+      background-size: 24px 20px;
+    }
+
+    /* Soft creamy card gradient */
+    .creamy-card {
+      background: linear-gradient(180deg, #ffffff 0%, #fffdf8 100%);
+      box-shadow: 0 4px 20px -2px rgba(74, 48, 34, 0.08), 0 2px 6px -1px rgba(74, 48, 34, 0.04);
+    }
+    
+    .creamy-card:hover {
+      box-shadow: 0 16px 32px -4px rgba(74, 48, 34, 0.16), 0 4px 12px -2px rgba(234, 179, 8, 0.12);
+      transform: translateY(-4px);
+    }
+
+    /* Delicious gold glow */
+    .butter-glow {
+      box-shadow: 0 0 20px rgba(234, 179, 8, 0.35);
+    }
+  </style>
 </head>
-<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col font-sans antialiased selection:bg-indigo-500 selection:text-white">
+<body class="bg-[#faf6f0] text-coffee-900 min-h-screen flex flex-col font-sans antialiased selection:bg-butter-400 selection:text-coffee-950">
 
   <!-- Top Navigation Bar -->
-  <header class="sticky top-0 z-30 bg-slate-900/95 backdrop-blur text-white border-b border-slate-800 shadow-md">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+  <header class="sticky top-0 z-40 bg-coffee-950/95 backdrop-blur-md text-white border-b border-coffee-800 shadow-lg">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 flex items-center justify-between">
+      
+      <!-- Brand Logo -->
       <div class="flex items-center space-x-3">
-        <span class="text-2xl animate-pulse">⚡</span>
-        <a href="/" class="text-xl sm:text-2xl font-black tracking-tight bg-gradient-to-r from-indigo-400 via-purple-300 to-pink-400 bg-clip-text text-transparent hover:opacity-90 transition">
-          ZENITH '26
-        </a>
-        <span class="hidden sm:inline-block text-xs uppercase tracking-wider font-semibold bg-indigo-500/20 text-indigo-300 px-2.5 py-0.5 rounded-full border border-indigo-500/30">
-          Fest Portal
-        </span>
+        <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-butter-400 to-amber-600 flex items-center justify-center text-xl shadow-md transform hover:rotate-12 transition">
+          🍨
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <a href="/" class="text-xl sm:text-2xl font-black tracking-tight font-display bg-gradient-to-r from-butter-200 via-amber-300 to-butter-400 bg-clip-text text-transparent hover:opacity-90 transition">
+              ZENITH '26
+            </a>
+            <span class="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider bg-amber-500/20 text-butter-300 px-2.5 py-0.5 rounded-full border border-amber-500/30">
+              <span>☕</span> Butter &amp; Cocoa Edition
+            </span>
+          </div>
+          <p class="text-[11px] text-amber-200/60 font-medium hidden sm:block">Artisanal Campus Fest &amp; Student Portal</p>
+        </div>
       </div>
 
+      <!-- Navigation & Quick Actions -->
       <nav class="flex items-center space-x-2 sm:space-x-4">
-        <a href="/" class="text-sm font-semibold text-white px-3 py-1.5 rounded-lg bg-indigo-600 shadow-sm hover:bg-indigo-500 transition">
-          Events
+        <a href="/" class="text-xs sm:text-sm font-bold text-coffee-950 px-4 py-2 rounded-xl bg-gradient-to-r from-butter-300 to-butter-400 hover:from-butter-200 hover:to-butter-300 shadow-md transition active:scale-95 flex items-center gap-1.5">
+          <span>🍦</span>
+          <span>Fest Flavors</span>
         </a>
-        <a href="/admin.html" class="text-sm font-medium text-slate-300 hover:text-white px-3 py-1.5 rounded-lg hover:bg-slate-800 border border-transparent hover:border-slate-700 transition flex items-center gap-1.5">
-          <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
-          </svg>
-          <span>Admin Dashboard</span>
+        <a href="/admin.html" class="text-xs sm:text-sm font-semibold text-coffee-200 hover:text-white px-3.5 py-2 rounded-xl hover:bg-coffee-900 border border-coffee-800/80 hover:border-amber-600/50 transition flex items-center gap-1.5">
+          <span>📊</span>
+          <span class="hidden sm:inline">Coordinator Lounge</span>
+          <span class="sm:hidden">Admin</span>
         </a>
       </nav>
     </div>
   </header>
 
-  <!-- Hero Section -->
-  <section class="relative bg-gradient-to-br from-slate-950 via-indigo-950 to-slate-900 text-white overflow-hidden py-12 sm:py-16 px-4 sm:px-6 lg:px-8 border-b border-indigo-950">
-    <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#818cf8_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none"></div>
-    <div class="relative max-w-5xl mx-auto text-center space-y-4">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
-        <span>📅 November 14–15, 2026</span>
-        <span class="text-indigo-400">•</span>
-        <span>Campus Grounds & Auditoriums</span>
+  <!-- Hero Section: Delicious Dessert Vibe -->
+  <section class="relative waffle-pattern text-white pt-16 pb-20 px-4 sm:px-6 lg:px-8 overflow-hidden border-b-4 border-amber-500/40">
+    
+    <!-- Floating Dessert Emojis Background Elements -->
+    <div class="absolute inset-0 pointer-events-none select-none overflow-hidden opacity-30">
+      <span class="absolute top-6 left-[8%] text-4xl animate-float-slow">🍦</span>
+      <span class="absolute top-16 right-[10%] text-5xl animate-float-delay">☕</span>
+      <span class="absolute bottom-10 left-[15%] text-4xl animate-float-fast">🍫</span>
+      <span class="absolute top-32 left-[48%] text-3xl animate-float-slow">🧇</span>
+      <span class="absolute bottom-8 right-[20%] text-4xl animate-float-delay">🍨</span>
+      <span class="absolute top-12 left-[32%] text-3xl animate-float-fast">🍩</span>
+    </div>
+
+    <!-- Soft Glow Radials -->
+    <div class="absolute -top-24 -left-24 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute -bottom-24 -right-24 w-96 h-96 bg-amber-600/10 rounded-full blur-3xl pointer-events-none"></div>
+
+    <div class="relative max-w-5xl mx-auto text-center space-y-6">
+      
+      <!-- Date Badge -->
+      <div class="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-amber-200 bg-coffee-900/80 px-4 py-1.5 rounded-full border border-amber-500/40 shadow-inner backdrop-blur">
+        <span>🍂</span>
+        <span>November 14–15, 2026 · Grand Campus Amphitheatre &amp; Arena</span>
+        <span>☕</span>
       </div>
-      <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white">
-        Ignite Your Spark at <span class="bg-gradient-to-r from-indigo-400 via-fuchsia-400 to-amber-300 bg-clip-text text-transparent">Zenith '26</span>
+
+      <!-- Main Headline -->
+      <h1 class="text-4xl sm:text-6xl lg:text-7xl font-black font-display tracking-tight text-white leading-tight">
+        Scoop Your Passion at <br class="hidden sm:inline" />
+        <span class="bg-gradient-to-r from-butter-200 via-butter-300 to-amber-400 bg-clip-text text-transparent drop-shadow-sm">
+          Zenith '26
+        </span>
       </h1>
-      <p class="text-slate-300 text-base sm:text-lg max-w-2xl mx-auto font-normal leading-relaxed">
-        Join over 1,500 students in 48 hours of competitions, tech sprints, live music, creative arts, and esports. Browse events below and secure your spot today!
+
+      <!-- Subtitle -->
+      <p class="max-w-2xl mx-auto text-base sm:text-lg text-coffee-200/90 leading-relaxed font-medium">
+        Where velvety dark mocha code meets sweet caramel rhythms, high-energy espresso showdowns, and artisanal gaming glory. 48 hours of pure collegiate sweetness!
       </p>
+
+      <!-- Highlights Pill Strip -->
+      <div class="pt-2 flex flex-wrap items-center justify-center gap-3 sm:gap-6 text-xs font-semibold text-amber-200/80">
+        <div class="flex items-center gap-1.5 bg-coffee-900/60 px-3 py-1 rounded-lg border border-coffee-800">
+          <span>☕</span> 4 Dark Roast Tech Sprints
+        </div>
+        <div class="flex items-center gap-1.5 bg-coffee-900/60 px-3 py-1 rounded-lg border border-coffee-800">
+          <span>🍨</span> 5 Sweet Cultural Nights
+        </div>
+        <div class="flex items-center gap-1.5 bg-coffee-900/60 px-3 py-1 rounded-lg border border-coffee-800">
+          <span>⚡</span> 1,500+ Enthusiastic Scoopers
+        </div>
+        <div class="flex items-center gap-1.5 bg-coffee-900/60 px-3 py-1 rounded-lg border border-coffee-800">
+          <span>🍫</span> 100% Free Campus Passes
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- Main Content Container -->
-  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10 flex-grow w-full">
+  <!-- Main Content Area -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12 flex-grow w-full">
     
-    <!-- Search & Category Filters -->
-    <div class="space-y-4 mb-8">
-      <div class="flex flex-col md:flex-row gap-3 items-stretch md:items-center justify-between">
+    <!-- Filter, Search and Category Strip -->
+    <div class="space-y-6 mb-10">
+      
+      <!-- Search Input Bar & Live Count -->
+      <div class="flex flex-col sm:flex-row gap-4 items-stretch sm:items-center justify-between">
         
-        <!-- Search Input -->
-        <div class="relative flex-1 max-w-md">
-          <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
-            </svg>
+        <!-- Search Field -->
+        <div class="relative flex-grow max-w-lg">
+          <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-coffee-400 text-lg">
+            🔍
           </div>
           <input 
             type="text" 
             id="search-input" 
-            placeholder="Search events by title..."
-            class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 shadow-sm transition text-sm"
+            placeholder="Search treats, coding battles, music nights..." 
+            class="w-full pl-11 pr-10 py-3.5 rounded-2xl bg-white border-2 border-amber-200/80 focus:border-amber-500 focus:ring-4 focus:ring-amber-200/40 text-coffee-950 placeholder-coffee-400 font-medium text-sm transition outline-none shadow-sm"
           >
           <button 
             id="clear-search-btn" 
-            class="hidden absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600 text-xs font-semibold"
+            class="hidden absolute inset-y-0 right-0 pr-3.5 flex items-center text-coffee-400 hover:text-coffee-700 transition"
             title="Clear search"
           >
-            Clear
+            ✕
           </button>
         </div>
 
-        <!-- Filter Count Badge -->
-        <div class="text-xs font-medium text-slate-500 self-center md:self-auto">
-          Showing <span id="event-count-display" class="font-bold text-slate-800">14</span> events
+        <!-- Event Counter -->
+        <div class="flex items-center gap-2 self-end sm:self-center bg-white px-4 py-2.5 rounded-2xl border border-amber-200/70 shadow-sm text-xs font-bold text-coffee-800">
+          <span>🍨</span>
+          <span>Showing <span id="event-count-display" class="text-amber-600 font-extrabold text-sm">14</span> Delights</span>
         </div>
       </div>
 
-      <!-- Category Badges / Filter Buttons -->
-      <div class="flex flex-wrap gap-2 pt-1" id="category-filters-container">
-        <button data-category="All" class="category-btn active px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition shadow-sm bg-indigo-600 text-white shadow-indigo-200">
-          All Events
+      <!-- Category Filter Tabs: Styled as Ice Cream Flavors -->
+      <div class="flex flex-wrap items-center gap-2.5 pt-1">
+        <button 
+          data-category="All" 
+          class="category-btn active px-4 py-2.5 rounded-2xl text-xs sm:text-sm font-bold transition flex items-center gap-1.5 shadow-sm active:scale-95 bg-coffee-900 text-butter-200 border-2 border-amber-500 butter-glow"
+        >
+          <span>🍦</span>
+          <span>All Scoops</span>
         </button>
-        <button data-category="Technical" class="category-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition bg-white text-slate-700 hover:bg-slate-100 border border-slate-200">
-          💻 Technical
+
+        <button 
+          data-category="Technical" 
+          class="category-btn px-4 py-2.5 rounded-2xl text-xs sm:text-sm font-bold transition flex items-center gap-1.5 shadow-sm active:scale-95 bg-white text-coffee-800 hover:bg-amber-50 border border-amber-200"
+        >
+          <span>☕</span>
+          <span>Dark Roast Tech</span>
         </button>
-        <button data-category="Cultural" class="category-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition bg-white text-slate-700 hover:bg-slate-100 border border-slate-200">
-          🎭 Cultural
+
+        <button 
+          data-category="Cultural" 
+          class="category-btn px-4 py-2.5 rounded-2xl text-xs sm:text-sm font-bold transition flex items-center gap-1.5 shadow-sm active:scale-95 bg-white text-coffee-800 hover:bg-amber-50 border border-amber-200"
+        >
+          <span>🍨</span>
+          <span>Vanilla Culture</span>
         </button>
-        <button data-category="Sports" class="category-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition bg-white text-slate-700 hover:bg-slate-100 border border-slate-200">
-          ⚽ Sports
+
+        <button 
+          data-category="Sports" 
+          class="category-btn px-4 py-2.5 rounded-2xl text-xs sm:text-sm font-bold transition flex items-center gap-1.5 shadow-sm active:scale-95 bg-white text-coffee-800 hover:bg-amber-50 border border-amber-200"
+        >
+          <span>⚡</span>
+          <span>Espresso Sports</span>
         </button>
-        <button data-category="Gaming" class="category-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition bg-white text-slate-700 hover:bg-slate-100 border border-slate-200">
-          🎮 Gaming
+
+        <button 
+          data-category="Gaming" 
+          class="category-btn px-4 py-2.5 rounded-2xl text-xs sm:text-sm font-bold transition flex items-center gap-1.5 shadow-sm active:scale-95 bg-white text-coffee-800 hover:bg-amber-50 border border-amber-200"
+        >
+          <span>🍫</span>
+          <span>Choco Gaming</span>
         </button>
-        <button data-category="Workshop" class="category-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition bg-white text-slate-700 hover:bg-slate-100 border border-slate-200">
-          ⚡ Workshop
+
+        <button 
+          data-category="Workshop" 
+          class="category-btn px-4 py-2.5 rounded-2xl text-xs sm:text-sm font-bold transition flex items-center gap-1.5 shadow-sm active:scale-95 bg-white text-coffee-800 hover:bg-amber-50 border border-amber-200"
+        >
+          <span>🧇</span>
+          <span>Waffle Workshop</span>
         </button>
       </div>
     </div>
 
-    <!-- Status Messages: Loading, Error, Empty -->
-    <div id="loading-state" class="hidden py-16 text-center space-y-3">
-      <div class="inline-block animate-spin rounded-full h-9 w-9 border-4 border-indigo-600 border-t-transparent"></div>
-      <p class="text-sm font-medium text-slate-500">Loading Zenith '26 events...</p>
+    <!-- Loading State -->
+    <div id="loading-state" class="hidden py-24 text-center">
+      <div class="inline-block p-4 rounded-3xl bg-white border-2 border-amber-300 shadow-md animate-bounce mb-3 text-3xl">
+        🍨
+      </div>
+      <h3 class="text-lg font-bold text-coffee-900">Brewing your fest menu...</h3>
+      <p class="text-xs text-coffee-500 mt-1">Churning fresh artisanal events</p>
     </div>
 
-    <div id="error-state" class="hidden py-12 px-6 bg-red-50 border border-red-200 rounded-2xl text-center max-w-lg mx-auto space-y-3">
-      <div class="text-red-500 text-3xl font-bold">⚠️</div>
-      <h3 class="text-base font-bold text-red-800">Unable to Load Events</h3>
-      <p id="error-message-text" class="text-xs text-red-600 leading-relaxed">
-        Could not connect to the backend server. Please make sure the FastAPI server is running on http://localhost:8002.
+    <!-- Error State -->
+    <div id="error-state" class="hidden py-16 text-center max-w-md mx-auto p-8 rounded-3xl bg-red-50/90 border-2 border-red-200 shadow-md">
+      <div class="text-4xl mb-3">☕⚠️</div>
+      <h3 class="text-lg font-bold text-red-900">Unable to Brew Events</h3>
+      <p id="error-message-text" class="text-xs text-red-700 mt-2 leading-relaxed">
+        Could not connect to the backend server.
       </p>
-      <button id="retry-btn" class="mt-2 inline-flex items-center px-4 py-2 rounded-lg bg-red-600 hover:bg-red-700 text-white text-xs font-semibold shadow-sm transition">
-        Retry Connection
+      <button id="retry-btn" class="mt-4 px-5 py-2.5 rounded-xl bg-red-700 text-white font-bold text-xs hover:bg-red-800 transition shadow">
+        Retry Brew
       </button>
     </div>
 
-    <div id="empty-state" class="hidden py-16 px-4 text-center space-y-3 bg-white rounded-2xl border border-dashed border-slate-300 max-w-md mx-auto">
-      <span class="text-4xl">🔍</span>
-      <h3 class="text-base font-bold text-slate-800">No events match your criteria</h3>
-      <p class="text-xs text-slate-500">Try adjusting your search query or choosing another category filter.</p>
-      <button id="reset-filters-btn" class="mt-2 inline-flex items-center px-4 py-2 rounded-lg bg-indigo-50 hover:bg-indigo-100 text-indigo-700 text-xs font-semibold transition">
-        Reset All Filters
+    <!-- Empty State -->
+    <div id="empty-state" class="hidden py-20 text-center max-w-md mx-auto p-8 rounded-3xl bg-white border-2 border-amber-200 shadow-sm">
+      <div class="text-5xl mb-3">🍨🔍</div>
+      <h3 class="text-lg font-bold text-coffee-900">No Scoops Found</h3>
+      <p class="text-xs text-coffee-500 mt-2 leading-relaxed">
+        We couldn't find any events matching your flavor filter or search term. Try another delicious keyword!
+      </p>
+      <button id="reset-filters-btn" class="mt-4 px-5 py-2 rounded-xl bg-coffee-800 text-butter-200 font-bold text-xs hover:bg-coffee-900 transition">
+        Reset to All Scoops
       </button>
     </div>
 
     <!-- Events Grid -->
-    <div id="events-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      <!-- Injected dynamically by js/app.js -->
+    <div id="events-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Injected by app.js -->
     </div>
   </main>
 
   <!-- Event Detail & Registration Modal -->
-  <div id="detail-modal" class="fixed inset-0 z-50 hidden bg-slate-950/70 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
-    <div class="bg-white rounded-2xl max-w-xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-slate-100 transform transition-all animate-fade-in my-8">
+  <div id="detail-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-coffee-950/70 backdrop-blur-sm overflow-y-auto">
+    <div class="bg-white rounded-3xl border-2 border-amber-300 shadow-2xl max-w-xl w-full my-8 overflow-hidden animate-pop">
       
-      <!-- Modal Header -->
-      <div class="relative bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 p-6 text-white rounded-t-2xl">
-        <button id="close-modal-btn" class="absolute top-4 right-4 text-slate-400 hover:text-white bg-slate-800/60 hover:bg-slate-800 rounded-full w-8 h-8 flex items-center justify-center transition">
+      <!-- Modal Header (Dark Espresso with Golden Butter accent) -->
+      <div class="bg-gradient-to-r from-coffee-950 via-coffee-900 to-coffee-800 text-white p-6 relative border-b-2 border-amber-500/40">
+        <button id="close-modal-btn" class="absolute top-5 right-5 w-8 h-8 rounded-full bg-coffee-800/80 hover:bg-coffee-700 text-amber-200 flex items-center justify-center text-sm transition">
           ✕
         </button>
-        <div class="flex items-start gap-3 pr-8">
-          <span id="modal-event-icon" class="text-3xl p-2 bg-indigo-500/20 rounded-xl border border-indigo-400/30">📅</span>
-          <div>
-            <div class="flex items-center gap-2 mb-1">
-              <span id="modal-event-category" class="text-xs uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-indigo-500/30 text-indigo-200">
-                Category
-              </span>
-              <span id="modal-event-fee" class="text-xs font-semibold px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300">
-                Free
-              </span>
+        <div class="flex items-start gap-4">
+          <div id="modal-event-icon" class="w-14 h-14 rounded-2xl bg-gradient-to-br from-butter-300 to-amber-500 text-coffee-950 flex items-center justify-center text-3xl shadow-md font-bold">
+            ⚡
+          </div>
+          <div class="space-y-1 pr-6">
+            <span id="modal-event-category" class="text-[10px] font-extrabold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-amber-400/20 text-butter-300 border border-amber-400/30">
+              Technical
+            </span>
+            <h2 id="modal-event-title" class="text-xl sm:text-2xl font-bold font-display text-white leading-tight">
+              Event Title
+            </h2>
+            <div id="modal-event-fee" class="text-xs font-bold text-butter-300">
+              Free Scoop
             </div>
-            <h2 id="modal-event-title" class="text-xl sm:text-2xl font-bold tracking-tight text-white">Event Title</h2>
           </div>
         </div>
       </div>
 
       <!-- Modal Body -->
-      <div class="p-6 space-y-6">
+      <div class="p-6 space-y-6 max-h-[75vh] overflow-y-auto">
         
-        <!-- Quick Meta Details -->
-        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 p-3 bg-slate-50 rounded-xl text-xs border border-slate-100">
-          <div>
-            <span class="block text-slate-400 font-medium">Date & Time</span>
-            <span id="modal-event-datetime" class="font-semibold text-slate-700">Nov 14, 10:00 AM</span>
+        <!-- Logistics Quick Grid -->
+        <div class="grid grid-cols-2 gap-3 p-4 rounded-2xl bg-amber-50/70 border border-amber-200/80 text-xs text-coffee-800">
+          <div class="flex items-center gap-2">
+            <span class="text-base">📅</span>
+            <div>
+              <div class="text-[10px] text-coffee-500 font-bold uppercase">When</div>
+              <div id="modal-event-datetime" class="font-bold">Nov 14 · 10:00 AM</div>
+            </div>
           </div>
-          <div>
-            <span class="block text-slate-400 font-medium">Venue</span>
-            <span id="modal-event-venue" class="font-semibold text-slate-700">Auditorium</span>
+          <div class="flex items-center gap-2">
+            <span class="text-base">📍</span>
+            <div>
+              <div class="text-[10px] text-coffee-500 font-bold uppercase">Venue</div>
+              <div id="modal-event-venue" class="font-bold truncate">Main Arena</div>
+            </div>
           </div>
-          <div class="col-span-2 sm:col-span-1">
-            <span class="block text-slate-400 font-medium">Availability</span>
-            <span id="modal-event-seats" class="font-semibold text-slate-700">30 / 100 seats left</span>
+          <div class="flex items-center gap-2 col-span-2 pt-2 border-t border-amber-200/60">
+            <span class="text-base">🍨</span>
+            <div>
+              <div class="text-[10px] text-coffee-500 font-bold uppercase">Capacity &amp; Seats</div>
+              <div id="modal-event-seats" class="font-bold">100 / 100 Seats Available</div>
+            </div>
           </div>
         </div>
 
-        <!-- Event Description -->
+        <!-- Description -->
         <div>
-          <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-1.5">Description</h4>
-          <p id="modal-event-description" class="text-sm text-slate-600 leading-relaxed">
-            Detailed information about the event rules, rounds, and guidelines.
+          <h4 class="text-xs font-extrabold text-coffee-950 uppercase tracking-wider mb-2">About This Scoop</h4>
+          <p id="modal-event-description" class="text-xs sm:text-sm text-coffee-700 leading-relaxed bg-[#fffdf8] p-4 rounded-2xl border border-amber-100">
+            Full details about this exciting fest event.
           </p>
         </div>
 
-        <hr class="border-slate-100">
-
         <!-- Registration Form Section -->
-        <div>
-          <h4 class="text-sm font-bold text-slate-900 mb-1">Register for this Event</h4>
-          <p class="text-xs text-slate-500 mb-4">Complete the form below to reserve your ticket. Registration is instant.</p>
+        <div class="pt-2 border-t border-amber-200">
+          <h4 class="text-sm font-bold text-coffee-950 mb-3 flex items-center gap-1.5">
+            <span>🎟️</span>
+            <span>Reserve Your Festive Seat</span>
+          </h4>
 
-          <!-- Status Alerts inside Form -->
-          <div id="form-error-alert" class="hidden mb-4 p-3 bg-red-50 border border-red-200 rounded-xl text-xs text-red-700 flex items-start gap-2">
-            <span class="font-bold">⚠️</span>
-            <span id="form-error-text">Registration failed.</span>
-          </div>
-
-          <div id="form-success-alert" class="hidden mb-4 p-4 bg-emerald-50 border border-emerald-200 rounded-xl text-xs text-emerald-800 space-y-1">
-            <div class="flex items-center gap-2 font-bold text-sm text-emerald-900">
-              <span>🎉 Registration Confirmed!</span>
-            </div>
-            <p id="form-success-text">You are registered for this event. See you at Zenith '26!</p>
-          </div>
-
-          <!-- The Registration Form -->
-          <form id="registration-form" class="space-y-4" novalidate>
+          <form id="registration-form" class="space-y-3.5">
             <input type="hidden" id="reg-event-id" value="">
 
             <div>
-              <label for="reg-name" class="block text-xs font-semibold text-slate-700 mb-1">
-                Student Full Name <span class="text-red-500">*</span>
-              </label>
+              <label for="reg-name" class="block text-xs font-bold text-coffee-800 mb-1">Student Full Name *</label>
               <input 
                 type="text" 
                 id="reg-name" 
-                name="student_name"
-                placeholder="e.g. Rahul Sharma" 
-                class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none focus:border-indigo-500 transition"
-                required
+                required 
+                placeholder="e.g. Maya Sharma"
+                class="w-full px-3.5 py-2.5 rounded-xl border border-amber-200 focus:border-amber-500 focus:ring-2 focus:ring-amber-200 text-xs text-coffee-900 outline-none transition"
               >
-              <p id="error-name" class="hidden text-xs text-red-500 mt-1">Please enter your name.</p>
+              <p id="error-name" class="hidden text-[11px] text-red-600 mt-1">Please enter your full name.</p>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
-                <label for="reg-roll" class="block text-xs font-semibold text-slate-700 mb-1">
-                  Roll / Student ID <span class="text-red-500">*</span>
-                </label>
+                <label for="reg-roll" class="block text-xs font-bold text-coffee-800 mb-1">College Roll No. *</label>
                 <input 
                   type="text" 
                   id="reg-roll" 
-                  name="roll_number"
-                  placeholder="e.g. 2026CS101" 
-                  class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none focus:border-indigo-500 transition"
-                  required
+                  required 
+                  placeholder="e.g. 26CS101"
+                  class="w-full px-3.5 py-2.5 rounded-xl border border-amber-200 focus:border-amber-500 focus:ring-2 focus:ring-amber-200 text-xs text-coffee-900 outline-none transition"
                 >
-                <p id="error-roll" class="hidden text-xs text-red-500 mt-1">Please enter your roll number.</p>
+                <p id="error-roll" class="hidden text-[11px] text-red-600 mt-1">Roll number is required.</p>
               </div>
 
               <div>
-                <label for="reg-phone" class="block text-xs font-semibold text-slate-700 mb-1">
-                  Phone Number <span class="text-slate-400 font-normal">(optional)</span>
-                </label>
+                <label for="reg-phone" class="block text-xs font-bold text-coffee-800 mb-1">Phone Number</label>
                 <input 
                   type="tel" 
                   id="reg-phone" 
-                  name="phone"
-                  placeholder="e.g. 9876543210" 
-                  class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none focus:border-indigo-500 transition"
+                  placeholder="e.g. 9876543210"
+                  class="w-full px-3.5 py-2.5 rounded-xl border border-amber-200 focus:border-amber-500 focus:ring-2 focus:ring-amber-200 text-xs text-coffee-900 outline-none transition"
                 >
               </div>
             </div>
 
             <div>
-              <label for="reg-email" class="block text-xs font-semibold text-slate-700 mb-1">
-                College / Personal Email <span class="text-red-500">*</span>
-              </label>
+              <label for="reg-email" class="block text-xs font-bold text-coffee-800 mb-1">Email Address *</label>
               <input 
                 type="email" 
                 id="reg-email" 
-                name="email"
-                placeholder="e.g. rahul@college.edu" 
-                class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none focus:border-indigo-500 transition"
-                required
+                required 
+                placeholder="e.g. student@college.edu"
+                class="w-full px-3.5 py-2.5 rounded-xl border border-amber-200 focus:border-amber-500 focus:ring-2 focus:ring-amber-200 text-xs text-coffee-900 outline-none transition"
               >
-              <p id="error-email" class="hidden text-xs text-red-500 mt-1">Please enter a valid email address with '@'.</p>
+              <p id="error-email" class="hidden text-[11px] text-red-600 mt-1">A valid email address containing '@' is required.</p>
             </div>
 
-            <div class="pt-2 flex items-center justify-end gap-3">
+            <!-- Error Banner -->
+            <div id="form-error-alert" class="hidden p-3 rounded-xl bg-red-50 border border-red-200 text-xs text-red-700">
+              <span id="form-error-text">An error occurred during registration.</span>
+            </div>
+
+            <!-- Success Banner -->
+            <div id="form-success-alert" class="hidden p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-xs text-emerald-800 space-y-1">
+              <div class="font-bold flex items-center gap-1.5 text-sm">
+                <span>🎉</span>
+                <span>Order Confirmed! Your Pass is Baked!</span>
+              </div>
+              <p id="form-success-text" class="text-emerald-700">Registration confirmed successfully.</p>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="pt-3 flex items-center justify-end gap-2.5">
               <button 
                 type="button" 
                 id="cancel-modal-btn" 
-                class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:bg-slate-100 transition"
+                class="px-4 py-2.5 rounded-xl text-xs font-bold text-coffee-700 hover:bg-amber-100 transition"
               >
-                Cancel
+                Close
               </button>
               <button 
                 type="submit" 
                 id="submit-reg-btn" 
-                class="px-5 py-2 rounded-xl text-xs sm:text-sm font-semibold text-white bg-indigo-600 hover:bg-indigo-700 active:scale-95 shadow-md shadow-indigo-200 transition flex items-center gap-2"
+                class="px-6 py-2.5 rounded-xl text-xs font-bold text-coffee-950 bg-gradient-to-r from-butter-300 via-butter-400 to-amber-500 hover:from-butter-200 hover:to-amber-400 shadow-md transition active:scale-95 flex items-center gap-2"
               >
-                <span id="submit-btn-spinner" class="hidden animate-spin rounded-full h-3.5 w-3.5 border-2 border-white border-t-transparent"></span>
-                <span id="submit-btn-text">Confirm Registration</span>
+                <span id="submit-btn-spinner" class="hidden animate-spin">☕</span>
+                <span id="submit-btn-text">Confirm My Scoop 🎟️</span>
               </button>
             </div>
           </form>
         </div>
-
       </div>
     </div>
   </div>
 
   <!-- Footer -->
-  <footer class="bg-slate-900 border-t border-slate-800 text-slate-400 text-xs py-8 mt-auto">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-      <div class="flex items-center gap-2 text-slate-300 font-semibold">
-        <span>⚡ Zenith '26 College Fest</span>
-        <span class="text-slate-600">•</span>
-        <span class="text-slate-400 font-normal">Student & Fest Management System</span>
+  <footer class="bg-coffee-950 border-t-2 border-amber-600/30 text-amber-200/80 text-xs py-8 mt-auto">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-center sm:text-left">
+      <div class="flex items-center gap-2 text-butter-200 font-bold">
+        <span>🍨 Zenith '26</span>
+        <span>•</span>
+        <span class="text-amber-200/60 font-medium">Butter &amp; Coffee Culinary Fest Experience</span>
       </div>
-      <div>
-        Built with FastAPI & Tailwind CSS · <a href="/admin.html" class="text-indigo-400 hover:underline">Admin Dashboard</a>
+      <div class="text-coffee-300">
+        Crafted with FastAPI, SQLite &amp; Tailwind CSS · 
+        <a href="/admin.html" class="text-butter-300 font-bold hover:underline">Coordinator Lounge →</a>
       </div>
     </div>
   </footer>

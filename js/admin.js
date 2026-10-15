@@ -46,11 +46,11 @@ document.addEventListener("DOMContentLoaded", () => {
   let allRegistrations = [];
 
   const categoryEmoji = {
-    Technical: "💻",
-    Cultural: "🎭",
-    Sports: "⚽",
-    Gaming: "🎮",
-    Workshop: "⚡"
+    Technical: "☕",
+    Cultural: "🍨",
+    Sports: "⚡",
+    Gaming: "🍫",
+    Workshop: "🧇"
   };
 
   /**
@@ -340,20 +340,16 @@ document.addEventListener("DOMContentLoaded", () => {
    * Tab Navigation Switcher
    */
   tabEventsBtn.addEventListener("click", () => {
-    tabEventsBtn.classList.add("border-indigo-600", "text-indigo-600", "font-bold");
-    tabEventsBtn.classList.remove("border-transparent", "text-slate-500");
-    tabRegistrationsBtn.classList.remove("border-indigo-600", "text-indigo-600", "font-bold");
-    tabRegistrationsBtn.classList.add("border-transparent", "text-slate-500");
+    tabEventsBtn.className = "px-5 py-2.5 rounded-2xl text-xs sm:text-sm font-bold bg-coffee-900 text-butter-200 border-2 border-amber-500 shadow-sm transition active:scale-95";
+    tabRegistrationsBtn.className = "px-5 py-2.5 rounded-2xl text-xs sm:text-sm font-bold bg-white text-coffee-800 border border-amber-200 hover:bg-amber-50 transition active:scale-95";
 
     viewEventsSection.classList.remove("hidden");
     viewRegistrationsSection.classList.add("hidden");
   });
 
   tabRegistrationsBtn.addEventListener("click", () => {
-    tabRegistrationsBtn.classList.add("border-indigo-600", "text-indigo-600", "font-bold");
-    tabRegistrationsBtn.classList.remove("border-transparent", "text-slate-500");
-    tabEventsBtn.classList.remove("border-indigo-600", "text-indigo-600", "font-bold");
-    tabEventsBtn.classList.add("border-transparent", "text-slate-500");
+    tabRegistrationsBtn.className = "px-5 py-2.5 rounded-2xl text-xs sm:text-sm font-bold bg-coffee-900 text-butter-200 border-2 border-amber-500 shadow-sm transition active:scale-95";
+    tabEventsBtn.className = "px-5 py-2.5 rounded-2xl text-xs sm:text-sm font-bold bg-white text-coffee-800 border border-amber-200 hover:bg-amber-50 transition active:scale-95";
 
     viewRegistrationsSection.classList.remove("hidden");
     viewEventsSection.classList.add("hidden");

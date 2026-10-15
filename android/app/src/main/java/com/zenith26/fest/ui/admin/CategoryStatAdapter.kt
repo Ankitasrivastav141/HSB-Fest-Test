@@ -10,11 +10,11 @@ class CategoryStatAdapter : RecyclerView.Adapter<CategoryStatAdapter.CategorySta
     private val items = mutableListOf<Pair<String, Int>>()
 
     private val categoryEmoji = mapOf(
-        "Technical" to "💻",
-        "Cultural" to "🎭",
-        "Sports" to "⚽",
-        "Gaming" to "🎮",
-        "Workshop" to "⚡"
+        "Technical" to "☕",
+        "Cultural" to "🍨",
+        "Sports" to "⚡",
+        "Gaming" to "🍫",
+        "Workshop" to "🧇"
     )
 
     fun submitMap(map: Map<String, Int>) {

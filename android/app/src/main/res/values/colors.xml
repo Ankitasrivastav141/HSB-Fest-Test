@@ -1,27 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Brand / Indigo -->
-    <color name="brand_50">#EEF2FF</color>
-    <color name="brand_100">#E0E7FF</color>
-    <color name="brand_500">#6366F1</color>
-    <color name="brand_600">#4F46E5</color>
-    <color name="brand_700">#4338CA</color>
-    <color name="brand_900">#312E81</color>
+    <!-- Butter & Coffee Palette -->
+    <color name="butter_cream">#FFFDF5</color>
+    <color name="butter_50">#FFFEF5</color>
+    <color name="butter_100">#FEF9C3</color>
+    <color name="butter_200">#FEF08A</color>
+    <color name="butter_300">#FDE047</color>
+    <color name="butter_400">#FACC15</color>
+    <color name="butter_500">#EAB308</color>
+    <color name="butter_600">#CA8A04</color>
 
-    <!-- Slate Palette -->
-    <color name="slate_50">#F8FAFC</color>
-    <color name="slate_100">#F1F5F9</color>
-    <color name="slate_200">#E2E8F0</color>
-    <color name="slate_300">#CBD5E1</color>
-    <color name="slate_400">#94A3B8</color>
-    <color name="slate_500">#64748B</color>
-    <color name="slate_600">#475569</color>
-    <color name="slate_700">#334155</color>
-    <color name="slate_800">#1E293B</color>
-    <color name="slate_900">#0F172A</color>
-    <color name="slate_950">#020617</color>
+    <!-- Coffee & Chocolate Palette -->
+    <color name="coffee_50">#FAF6F0</color>
+    <color name="coffee_100">#F5EBE0</color>
+    <color name="coffee_200">#E6CCB2</color>
+    <color name="coffee_300">#DDB892</color>
+    <color name="coffee_400">#B08968</color>
+    <color name="coffee_500">#7F5539</color>
+    <color name="coffee_600">#6F4831</color>
+    <color name="coffee_700">#4A3022</color>
+    <color name="coffee_800">#382319</color>
+    <color name="coffee_900">#211510</color>
+    <color name="coffee_950">#140C09</color>
 
-    <!-- Emerald / Success -->
+    <!-- Chocolate Accents -->
+    <color name="choco_dark">#211510</color>
+    <color name="choco_milk">#593622</color>
+    <color name="choco_caramel">#D97706</color>
+    <color name="waffle_border">#FDE68A</color>
+
+    <!-- Brand / Primary -->
+    <color name="brand_50">#FFFEF5</color>
+    <color name="brand_100">#FEF9C3</color>
+    <color name="brand_500">#EAB308</color>
+    <color name="brand_600">#382319</color>
+    <color name="brand_700">#211510</color>
+    <color name="brand_900">#140C09</color>
+
+    <!-- Slate / Neutral Mapping for compatibility -->
+    <color name="slate_50">#FAF6F0</color>
+    <color name="slate_100">#F5EBE0</color>
+    <color name="slate_200">#FDE68A</color>
+    <color name="slate_300">#DDB892</color>
+    <color name="slate_400">#B08968</color>
+    <color name="slate_500">#7F5539</color>
+    <color name="slate_600">#6F4831</color>
+    <color name="slate_700">#4A3022</color>
+    <color name="slate_800">#382319</color>
+    <color name="slate_900">#211510</color>
+    <color name="slate_950">#140C09</color>
+
+    <!-- Success & Alert Colors -->
     <color name="emerald_50">#ECFDF5</color>
     <color name="emerald_100">#D1FAE5</color>
     <color name="emerald_200">#A7F3D0</color>
@@ -31,7 +60,7 @@
     <color name="emerald_800">#065F46</color>
     <color name="emerald_900">#064E3B</color>
 
-    <!-- Amber / Warning -->
+    <!-- Amber / Caramel -->
     <color name="amber_50">#FFFBEB</color>
     <color name="amber_100">#FEF3C7</color>
     <color name="amber_200">#FDE68A</color>
@@ -39,7 +68,7 @@
     <color name="amber_600">#D97706</color>
     <color name="amber_700">#B45309</color>
 
-    <!-- Red / Danger -->
+    <!-- Red / Sold Out -->
     <color name="red_50">#FEF2F2</color>
     <color name="red_100">#FEE2E2</color>
     <color name="red_200">#FECACA</color>
@@ -47,18 +76,18 @@
     <color name="red_700">#B91C1C</color>
     <color name="red_800">#991B1B</color>
 
-    <!-- Category Specific Badges -->
-    <color name="blue_50">#EFF6FF</color>
-    <color name="blue_200">#BFDBFE</color>
-    <color name="blue_700">#1D4ED8</color>
+    <!-- Ice Cream Flavor Badges -->
+    <color name="blue_50">#FEF3C7</color>
+    <color name="blue_200">#FDE68A</color>
+    <color name="blue_700">#78350F</color>
 
-    <color name="purple_50">#FAF5FF</color>
-    <color name="purple_200">#E9D5FF</color>
-    <color name="purple_700">#7E22CE</color>
+    <color name="purple_50">#FCE7F3</color>
+    <color name="purple_200">#FBCFE8</color>
+    <color name="purple_700">#831843</color>
 
-    <color name="rose_50">#FFF1F2</color>
-    <color name="rose_200">#FECDD3</color>
-    <color name="rose_700">#BE123C</color>
+    <color name="rose_50">#EDE9FE</color>
+    <color name="rose_200">#DDD6FE</color>
+    <color name="rose_700">#5B21B6</color>
 
     <!-- General -->
     <color name="white">#FFFFFF</color>

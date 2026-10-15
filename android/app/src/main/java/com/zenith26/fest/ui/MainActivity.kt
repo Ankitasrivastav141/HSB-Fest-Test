@@ -227,10 +227,10 @@ class MainActivity : AppCompatActivity() {
         buttons.forEach { (btn, cat) ->
             if (cat.equals(currentCategory, ignoreCase = true)) {
                 btn.setBackgroundResource(R.drawable.bg_category_active)
-                btn.setTextColor(ContextCompat.getColor(this, R.color.white))
+                btn.setTextColor(ContextCompat.getColor(this, R.color.butter_200))
             } else {
                 btn.setBackgroundResource(R.drawable.bg_category_inactive)
-                btn.setTextColor(ContextCompat.getColor(this, R.color.slate_700))
+                btn.setTextColor(ContextCompat.getColor(this, R.color.coffee_800))
             }
         }
     }

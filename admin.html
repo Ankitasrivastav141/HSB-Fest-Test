@@ -3,68 +3,95 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Dashboard — Zenith '26 Fest System</title>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📊</text></svg>">
+  <title>Coordinator Lounge — Zenith '26 ☕🍨</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>☕</text></svg>">
   
   <!-- Tailwind CSS via Play CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet">
+
   <script>
     tailwind.config = {
       theme: {
         extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            display: ['"Playfair Display"', 'serif'],
+          },
           colors: {
-            brand: {
-              50: '#eef2ff',
-              100: '#e0e7ff',
-              500: '#6366f1',
-              600: '#4f46e5',
-              700: '#4338ca',
-            }
-          },
-          animation: {
-            'fade-in': 'fadeIn 0.25s ease-out forwards',
-          },
-          keyframes: {
-            fadeIn: {
-              '0%': { opacity: 0, transform: 'translateY(4px)' },
-              '100%': { opacity: 1, transform: 'translateY(0)' },
+            butter: {
+              50: '#fffef5',
+              100: '#fef9c3',
+              200: '#fef08a',
+              300: '#fde047',
+              400: '#facc15',
+              500: '#eab308',
+              600: '#ca8a04',
+            },
+            coffee: {
+              50: '#faf6f0',
+              100: '#f5ebe0',
+              200: '#e6ccb2',
+              300: '#ddb892',
+              400: '#b08968',
+              500: '#7f5539',
+              600: '#6f4831',
+              700: '#4a3022',
+              800: '#382319',
+              900: '#211510',
+              950: '#140c09',
             }
           }
         }
       }
     }
   </script>
+
+  <style>
+    .waffle-pattern-dark {
+      background-color: #140c09;
+      background-image: 
+        radial-gradient(circle at 50% 50%, rgba(245, 194, 73, 0.08) 2px, transparent 2px),
+        linear-gradient(45deg, transparent 48%, rgba(245, 194, 73, 0.04) 49%, rgba(245, 194, 73, 0.04) 51%, transparent 52%),
+        linear-gradient(-45deg, transparent 48%, rgba(245, 194, 73, 0.04) 49%, rgba(245, 194, 73, 0.04) 51%, transparent 52%);
+      background-size: 28px 28px, 20px 20px, 20px 20px;
+    }
+    .creamy-card {
+      background: linear-gradient(180deg, #ffffff 0%, #fffdf8 100%);
+      box-shadow: 0 4px 20px -2px rgba(74, 48, 34, 0.08);
+    }
+  </style>
 </head>
-<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col font-sans antialiased selection:bg-indigo-500 selection:text-white">
+<body class="bg-[#faf6f0] text-coffee-900 min-h-screen flex flex-col font-sans antialiased selection:bg-butter-400 selection:text-coffee-950">
 
   <!-- Admin Navbar -->
-  <header class="sticky top-0 z-30 bg-slate-900 border-b border-slate-800 text-white shadow-md">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+  <header class="sticky top-0 z-30 bg-coffee-950 border-b border-coffee-800 text-white shadow-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 flex items-center justify-between">
       <div class="flex items-center space-x-3">
-        <span class="text-2xl">⚡</span>
+        <span class="text-2xl">☕</span>
         <div>
-          <a href="/" class="text-lg sm:text-xl font-black tracking-tight text-white hover:text-indigo-300 transition">
+          <a href="/" class="text-lg sm:text-xl font-black font-display tracking-tight text-butter-200 hover:text-white transition">
             ZENITH '26
           </a>
-          <span class="ml-2 text-xs font-semibold px-2 py-0.5 rounded bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
-            Coordinator Dashboard
+          <span class="ml-2 text-[10px] font-extrabold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-amber-500/20 text-butter-300 border border-amber-500/30">
+            Coordinator Lounge
           </span>
         </div>
       </div>
 
       <div class="flex items-center space-x-3">
-        <button id="add-event-btn" class="text-xs font-semibold px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white shadow-sm transition flex items-center gap-1.5">
+        <button id="add-event-btn" class="text-xs font-bold px-4 py-2 rounded-xl bg-gradient-to-r from-butter-300 via-butter-400 to-amber-500 hover:from-butter-200 hover:to-amber-400 text-coffee-950 shadow-md transition active:scale-95 flex items-center gap-1.5">
           <span>+</span>
-          <span>Add Event</span>
+          <span>Add New Scoop</span>
         </button>
-        <button id="refresh-dashboard-btn" class="text-xs font-medium px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition flex items-center gap-1">
-          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
-          </svg>
+        <button id="refresh-dashboard-btn" class="text-xs font-semibold px-3 py-2 rounded-xl bg-coffee-900 hover:bg-coffee-800 text-amber-200 border border-coffee-800 transition flex items-center gap-1.5">
+          <span>🔄</span>
           <span class="hidden sm:inline">Refresh</span>
         </button>
-        <a href="/" class="text-xs font-medium px-3 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white transition">
-          View Portal →
+        <a href="/" class="text-xs font-bold px-3.5 py-2 rounded-xl bg-coffee-800 hover:bg-coffee-700 text-butter-200 transition">
+          View Fest Menu →
         </a>
       </div>
     </div>
@@ -76,24 +103,24 @@
     <!-- Page Header & Live Status Indicator -->
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
       <div>
-        <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Fest Operations & Analytics</h1>
-        <p class="text-xs sm:text-sm text-slate-500 mt-0.5">Real-time live registration status and venue capacity tracking.</p>
+        <h1 class="text-2xl sm:text-3xl font-black font-display text-coffee-950 tracking-tight">Fest Operations &amp; Bakery Stats</h1>
+        <p class="text-xs sm:text-sm text-coffee-600 mt-0.5">Real-time live registration status and venue capacity tracking.</p>
       </div>
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium bg-emerald-50 text-emerald-700 border border-emerald-200 self-start sm:self-auto">
-        <span class="h-2 w-2 rounded-full bg-emerald-500 animate-ping"></span>
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold bg-amber-100/90 text-amber-950 border border-amber-300 self-start sm:self-auto shadow-xs">
+        <span class="h-2 w-2 rounded-full bg-amber-500 animate-ping"></span>
         <span id="last-updated-text">Live Database Sync</span>
       </div>
     </div>
 
     <!-- Error Banner if Backend is down -->
-    <div id="admin-error-banner" class="hidden p-4 rounded-xl bg-red-50 border border-red-200 text-red-800 text-sm flex items-start gap-3">
-      <span class="text-xl">⚠️</span>
+    <div id="admin-error-banner" class="hidden p-4 rounded-2xl bg-red-50 border-2 border-red-200 text-red-800 text-sm flex items-start gap-3">
+      <span class="text-xl">☕⚠️</span>
       <div class="flex-1">
         <p class="font-bold">Backend Connection Failed</p>
-        <p id="admin-error-text" class="text-xs mt-1 text-red-600">Could not fetch statistics or event data from the FastAPI server.</p>
+        <p id="admin-error-text" class="text-xs mt-1 text-red-600">Could not fetch statistics or event data from the server.</p>
       </div>
-      <button id="admin-retry-btn" class="px-3 py-1 text-xs font-bold bg-red-600 hover:bg-red-700 text-white rounded-lg transition">
-        Retry
+      <button id="admin-retry-btn" class="px-3 py-1.5 text-xs font-bold bg-red-700 hover:bg-red-800 text-white rounded-xl transition">
+        Retry Brew
       </button>
     </div>
 
@@ -101,115 +128,117 @@
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5" id="stats-cards-container">
       
       <!-- Total Events -->
-      <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm relative overflow-hidden">
+      <div class="creamy-card p-5 rounded-3xl border-2 border-amber-200/80 shadow-sm relative overflow-hidden">
         <div class="flex items-center justify-between">
-          <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Total Events</span>
-          <span class="p-2 rounded-xl bg-blue-50 text-blue-600 text-lg">📅</span>
+          <span class="text-xs font-extrabold uppercase tracking-wider text-coffee-500">Total Delights</span>
+          <span class="p-2.5 rounded-2xl bg-amber-100 text-amber-900 text-lg">🍨</span>
         </div>
         <div class="mt-3">
-          <div id="stat-total-events" class="text-3xl font-black text-slate-900">--</div>
-          <p class="text-xs text-slate-500 mt-1">Across 5 fest categories</p>
+          <div id="stat-total-events" class="text-3xl font-black font-display text-coffee-950">--</div>
+          <p class="text-xs text-coffee-600 mt-1">Across 5 artisanal categories</p>
         </div>
       </div>
 
       <!-- Total Registrations -->
-      <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm relative overflow-hidden">
+      <div class="creamy-card p-5 rounded-3xl border-2 border-amber-200/80 shadow-sm relative overflow-hidden">
         <div class="flex items-center justify-between">
-          <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Total Registrations</span>
-          <span class="p-2 rounded-xl bg-purple-50 text-purple-600 text-lg">🎟️</span>
+          <span class="text-xs font-extrabold uppercase tracking-wider text-coffee-500">Total Orders</span>
+          <span class="p-2.5 rounded-2xl bg-pink-100 text-pink-900 text-lg">🎟️</span>
         </div>
         <div class="mt-3">
-          <div id="stat-total-registrations" class="text-3xl font-black text-slate-900">--</div>
-          <p class="text-xs text-slate-500 mt-1">Unique student entries</p>
+          <div id="stat-total-registrations" class="text-3xl font-black font-display text-coffee-950">--</div>
+          <p class="text-xs text-coffee-600 mt-1">Confirmed student passes</p>
         </div>
       </div>
 
       <!-- Overall Capacity Utilization -->
-      <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm relative overflow-hidden">
+      <div class="creamy-card p-5 rounded-3xl border-2 border-amber-200/80 shadow-sm relative overflow-hidden">
         <div class="flex items-center justify-between">
-          <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Overall Utilization</span>
-          <span class="p-2 rounded-xl bg-indigo-50 text-indigo-600 text-lg">📈</span>
+          <span class="text-xs font-extrabold uppercase tracking-wider text-coffee-500">Fest Capacity</span>
+          <span class="p-2.5 rounded-2xl bg-emerald-100 text-emerald-900 text-lg">📈</span>
         </div>
         <div class="mt-3">
           <div class="flex items-baseline gap-2">
-            <span id="stat-utilization-pct" class="text-3xl font-black text-slate-900">--%</span>
-            <span id="stat-capacity-fraction" class="text-xs text-slate-500">of -- seats</span>
+            <span id="stat-utilization-pct" class="text-3xl font-black font-display text-coffee-950">--%</span>
+            <span id="stat-capacity-fraction" class="text-xs font-medium text-coffee-600">-- / --</span>
           </div>
-          <!-- Progress bar -->
-          <div class="w-full bg-slate-100 rounded-full h-1.5 mt-2.5 overflow-hidden">
-            <div id="stat-utilization-bar" class="bg-indigo-600 h-1.5 rounded-full transition-all duration-500" style="width: 0%"></div>
+          <!-- Progress Bar -->
+          <div class="w-full bg-amber-100 h-2.5 rounded-full mt-2.5 overflow-hidden">
+            <div id="stat-utilization-bar" class="bg-gradient-to-r from-butter-400 to-amber-600 h-2.5 rounded-full transition-all duration-500" style="width: 0%"></div>
           </div>
         </div>
       </div>
 
       <!-- Upcoming Events -->
-      <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm relative overflow-hidden">
+      <div class="creamy-card p-5 rounded-3xl border-2 border-amber-200/80 shadow-sm relative overflow-hidden">
         <div class="flex items-center justify-between">
-          <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Upcoming Events</span>
-          <span class="p-2 rounded-xl bg-emerald-50 text-emerald-600 text-lg">⏳</span>
+          <span class="text-xs font-extrabold uppercase tracking-wider text-coffee-500">Scheduled Sprints</span>
+          <span class="p-2.5 rounded-2xl bg-purple-100 text-purple-900 text-lg">⏰</span>
         </div>
         <div class="mt-3">
-          <div id="stat-upcoming-events" class="text-3xl font-black text-slate-900">--</div>
-          <p class="text-xs text-slate-500 mt-1">Scheduled Nov 14-15</p>
+          <div id="stat-upcoming-events" class="text-3xl font-black font-display text-coffee-950">--</div>
+          <p class="text-xs text-coffee-600 mt-1">Live in fest lineup</p>
         </div>
       </div>
-
     </div>
 
-    <!-- Category Breakdown Card -->
-    <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
-      <div class="flex items-center justify-between mb-4">
-        <h2 class="text-sm font-bold uppercase tracking-wider text-slate-700">Events Distribution by Category</h2>
-        <span class="text-xs text-slate-400 font-medium">Computed live from database</span>
+    <!-- Category Breakdown Section -->
+    <div class="creamy-card p-6 rounded-3xl border-2 border-amber-200/80 shadow-sm space-y-4">
+      <div class="flex items-center justify-between">
+        <div>
+          <h2 class="text-base font-black font-display text-coffee-950">Artisanal Category Breakdown</h2>
+          <p class="text-xs text-coffee-600">Distribution of fest delights by culinary category.</p>
+        </div>
+        <span class="text-xl">🧇☕</span>
       </div>
       <div id="categories-container" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
-        <!-- Rendered dynamically -->
-        <div class="p-3 rounded-xl bg-slate-50 border border-slate-100 text-center animate-pulse">
-          <div class="h-3 w-12 bg-slate-200 rounded mx-auto mb-1"></div>
-          <div class="h-6 w-8 bg-slate-200 rounded mx-auto"></div>
-        </div>
+        <!-- Dynamically injected -->
       </div>
     </div>
 
-    <!-- Navigation Tabs: Events Table vs Raw Registrations -->
-    <div class="border-b border-slate-200">
-      <nav class="flex space-x-6 text-sm font-medium">
-        <button id="tab-events-btn" class="pb-3 border-b-2 border-indigo-600 text-indigo-600 font-bold transition flex items-center gap-1.5">
-          <span>📋</span>
-          <span>Event Capacity & Utilization Table</span>
-        </button>
-        <button id="tab-registrations-btn" class="pb-3 border-b-2 border-transparent text-slate-500 hover:text-slate-700 transition flex items-center gap-1.5">
-          <span>👥</span>
-          <span>Raw Registration Roster</span>
-        </button>
-      </nav>
+    <!-- Tab View Buttons (Events Utilization vs Registrations List) -->
+    <div class="flex items-center gap-2 border-b-2 border-amber-200 pb-1">
+      <button 
+        id="tab-events-btn" 
+        class="px-5 py-2.5 rounded-2xl text-xs sm:text-sm font-bold bg-coffee-900 text-butter-200 border-2 border-amber-500 shadow-sm transition active:scale-95"
+      >
+        🍦 Events &amp; Seat Utilization
+      </button>
+      <button 
+        id="tab-registrations-btn" 
+        class="px-5 py-2.5 rounded-2xl text-xs sm:text-sm font-bold bg-white text-coffee-800 border border-amber-200 hover:bg-amber-50 transition active:scale-95"
+      >
+        🎟️ Student Orders Roster
+      </button>
     </div>
 
-    <!-- TAB 1: Events Capacity Table View -->
+    <!-- View 1: Events Utilization Table -->
     <section id="view-events-section" class="space-y-4">
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-        <div class="text-xs text-slate-500">
-          Ranked by highest demand (utilization % descending). Events over <span class="font-bold text-amber-600">90% capacity</span> are highlighted.
-        </div>
-        <div class="text-xs font-semibold text-slate-400">
-          Showing <span id="table-events-count" class="text-slate-800">14</span> events
-        </div>
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
+        <h2 class="text-lg font-black font-display text-coffee-950 flex items-center gap-2">
+          <span>Events Roster</span>
+          <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-900 border border-amber-300">
+            <span id="table-events-count">0</span> Listed
+          </span>
+        </h2>
+        <span class="text-xs text-coffee-600">Sorted by highest demand first</span>
       </div>
 
-      <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+      <div class="creamy-card rounded-3xl border-2 border-amber-200/80 overflow-hidden shadow-sm">
         <div class="overflow-x-auto">
-          <table class="w-full text-left border-collapse text-xs sm:text-sm">
-            <thead>
-              <tr class="bg-slate-50/80 border-b border-slate-200 text-slate-500 font-bold text-xs uppercase tracking-wider">
-                <th class="py-3 px-4">Event</th>
-                <th class="py-3 px-3">Category</th>
-                <th class="py-3 px-3">Date & Time</th>
-                <th class="py-3 px-3">Venue</th>
-                <th class="py-3 px-3">Booked / Total</th>
-                <th class="py-3 px-4 text-right">Utilization %</th>
+          <table class="w-full text-left text-xs text-coffee-800">
+            <thead class="bg-coffee-950 text-amber-200 uppercase font-black tracking-wider text-[11px] border-b border-coffee-800">
+              <tr>
+                <th scope="col" class="px-5 py-3.5">Event Delight</th>
+                <th scope="col" class="px-4 py-3.5">Category</th>
+                <th scope="col" class="px-4 py-3.5">Venue &amp; Time</th>
+                <th scope="col" class="px-4 py-3.5 text-center">Capacity</th>
+                <th scope="col" class="px-4 py-3.5 text-center">Orders</th>
+                <th scope="col" class="px-4 py-3.5 text-center">Seats Left</th>
+                <th scope="col" class="px-4 py-3.5">Demand Level</th>
               </tr>
             </thead>
-            <tbody id="events-table-body" class="divide-y divide-slate-100 font-normal">
+            <tbody id="events-table-body" class="divide-y divide-amber-100 font-medium">
               <!-- Dynamically populated -->
             </tbody>
           </table>
@@ -217,123 +246,133 @@
       </div>
     </section>
 
-    <!-- TAB 2: Raw Registrations Table View -->
+    <!-- View 2: Registrations Management Table -->
     <section id="view-registrations-section" class="hidden space-y-4">
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-        <!-- Event Filter Dropdown -->
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
         <div class="flex items-center gap-2">
-          <label for="filter-registration-event" class="text-xs font-semibold text-slate-700">Filter by Event:</label>
-          <select id="filter-registration-event" class="text-xs rounded-xl border border-slate-200 px-3 py-1.5 bg-white text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-sm">
-            <option value="">All Events</option>
+          <h2 class="text-lg font-black font-display text-coffee-950">Student Passes Roster</h2>
+          <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-900 border border-amber-300">
+            <span id="registrations-count-display">0</span> Passes
+          </span>
+        </div>
+
+        <!-- Filter Registrations by Event Dropdown -->
+        <div class="flex items-center gap-2 text-xs">
+          <label for="filter-registration-event" class="font-bold text-coffee-800">Filter by Event:</label>
+          <select 
+            id="filter-registration-event" 
+            class="px-3 py-2 rounded-xl bg-white border border-amber-200 text-coffee-950 font-semibold focus:border-amber-500 outline-none text-xs"
+          >
+            <option value="">All Events (Full Roster)</option>
           </select>
         </div>
-        <div class="text-xs text-slate-500">
-          Showing <span id="registrations-count-display" class="font-bold text-slate-800">0</span> registrations
-        </div>
       </div>
 
-      <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+      <div class="creamy-card rounded-3xl border-2 border-amber-200/80 overflow-hidden shadow-sm">
         <div class="overflow-x-auto">
-          <table class="w-full text-left border-collapse text-xs sm:text-sm">
-            <thead>
-              <tr class="bg-slate-50/80 border-b border-slate-200 text-slate-500 font-bold text-xs uppercase tracking-wider">
-                <th class="py-3 px-4">ID</th>
-                <th class="py-3 px-3">Student Name</th>
-                <th class="py-3 px-3">Roll No</th>
-                <th class="py-3 px-3">Email</th>
-                <th class="py-3 px-3">Phone</th>
-                <th class="py-3 px-3">Event</th>
-                <th class="py-3 px-3">Registered At</th>
-                <th class="py-3 px-4 text-right">Actions</th>
+          <table class="w-full text-left text-xs text-coffee-800">
+            <thead class="bg-coffee-950 text-amber-200 uppercase font-black tracking-wider text-[11px] border-b border-coffee-800">
+              <tr>
+                <th scope="col" class="px-5 py-3.5">Order ID</th>
+                <th scope="col" class="px-4 py-3.5">Student Name</th>
+                <th scope="col" class="px-4 py-3.5">Roll No.</th>
+                <th scope="col" class="px-4 py-3.5">Email</th>
+                <th scope="col" class="px-4 py-3.5">Phone</th>
+                <th scope="col" class="px-4 py-3.5">Booked Event</th>
+                <th scope="col" class="px-4 py-3.5">Time</th>
+                <th scope="col" class="px-4 py-3.5 text-right">Actions</th>
               </tr>
             </thead>
-            <tbody id="registrations-table-body" class="divide-y divide-slate-100 font-normal">
+            <tbody id="registrations-table-body" class="divide-y divide-amber-100 font-medium">
               <!-- Dynamically populated -->
             </tbody>
           </table>
         </div>
       </div>
     </section>
-
   </main>
 
-  <!-- Stretch Goal 1: Add Event Modal -->
-  <div id="add-event-modal" class="fixed inset-0 z-50 hidden bg-slate-950/70 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
-    <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-slate-100 my-8">
-      <div class="flex items-center justify-between pb-3 border-b border-slate-100">
-        <h3 class="text-base font-bold text-slate-900">Add New Zenith '26 Event</h3>
-        <button id="close-add-event-modal" class="text-slate-400 hover:text-slate-600 text-lg">✕</button>
+  <!-- Add Event Modal (Coordinator Lounge) -->
+  <div id="add-event-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-coffee-950/70 backdrop-blur-sm overflow-y-auto">
+    <div class="bg-white rounded-3xl border-2 border-amber-300 shadow-2xl max-w-lg w-full my-8 overflow-hidden animate-pop">
+      <div class="bg-gradient-to-r from-coffee-950 via-coffee-900 to-coffee-800 text-white p-5 flex items-center justify-between border-b-2 border-amber-500/40">
+        <div class="flex items-center gap-2">
+          <span class="text-xl">🍨</span>
+          <h3 class="text-base font-bold font-display text-white">Create New Fest Delight</h3>
+        </div>
+        <button type="button" id="close-add-event-modal" class="text-amber-200 hover:text-white text-sm">✕</button>
       </div>
 
-      <form id="add-event-form" class="mt-4 space-y-3.5 text-xs">
-        <div id="add-event-error-alert" class="hidden p-3 bg-red-50 border border-red-200 rounded-xl text-red-700"></div>
+      <form id="add-event-form" class="p-6 space-y-3.5 text-xs">
+        <div id="add-event-error-alert" class="hidden p-3 rounded-xl bg-red-50 text-red-700 border border-red-200">
+          Error creating event.
+        </div>
 
         <div>
-          <label class="block font-semibold text-slate-700 mb-1">Title *</label>
-          <input type="text" id="new-event-title" required class="w-full px-3 py-2 border rounded-xl focus:ring-2 focus:ring-indigo-500" placeholder="e.g. Hackathon 2026">
+          <label class="block font-bold text-coffee-800 mb-1">Delight Title *</label>
+          <input type="text" id="new-event-title" required class="w-full px-3 py-2 rounded-xl border border-amber-200 text-coffee-950 outline-none">
         </div>
 
         <div class="grid grid-cols-2 gap-3">
           <div>
-            <label class="block font-semibold text-slate-700 mb-1">Category *</label>
-            <select id="new-event-category" required class="w-full px-3 py-2 border rounded-xl focus:ring-2 focus:ring-indigo-500 bg-white">
-              <option value="Technical">Technical</option>
-              <option value="Cultural">Cultural</option>
-              <option value="Sports">Sports</option>
-              <option value="Gaming">Gaming</option>
-              <option value="Workshop">Workshop</option>
+            <label class="block font-bold text-coffee-800 mb-1">Category *</label>
+            <select id="new-event-category" class="w-full px-3 py-2 rounded-xl border border-amber-200 text-coffee-950 outline-none">
+              <option value="Technical">Technical (Dark Roast)</option>
+              <option value="Cultural">Cultural (Vanilla Swirl)</option>
+              <option value="Sports">Sports (Espresso Rush)</option>
+              <option value="Gaming">Gaming (Belgian Choco)</option>
+              <option value="Workshop">Workshop (Golden Waffle)</option>
             </select>
           </div>
           <div>
-            <label class="block font-semibold text-slate-700 mb-1">Icon (Emoji)</label>
-            <input type="text" id="new-event-icon" value="⚡" class="w-full px-3 py-2 border rounded-xl focus:ring-2 focus:ring-indigo-500">
+            <label class="block font-bold text-coffee-800 mb-1">Emoji Icon</label>
+            <input type="text" id="new-event-icon" value="🍨" class="w-full px-3 py-2 rounded-xl border border-amber-200 text-coffee-950 outline-none">
           </div>
         </div>
 
         <div>
-          <label class="block font-semibold text-slate-700 mb-1">Venue *</label>
-          <input type="text" id="new-event-venue" required class="w-full px-3 py-2 border rounded-xl focus:ring-2 focus:ring-indigo-500" placeholder="e.g. Main Auditorium">
+          <label class="block font-bold text-coffee-800 mb-1">Description</label>
+          <textarea id="new-event-desc" rows="2" class="w-full px-3 py-2 rounded-xl border border-amber-200 text-coffee-950 outline-none"></textarea>
         </div>
 
         <div class="grid grid-cols-2 gap-3">
           <div>
-            <label class="block font-semibold text-slate-700 mb-1">Event Date *</label>
-            <input type="date" id="new-event-date" value="2026-11-14" required class="w-full px-3 py-2 border rounded-xl focus:ring-2 focus:ring-indigo-500">
+            <label class="block font-bold text-coffee-800 mb-1">Date *</label>
+            <input type="date" id="new-event-date" required value="2026-11-14" class="w-full px-3 py-2 rounded-xl border border-amber-200 text-coffee-950 outline-none">
           </div>
           <div>
-            <label class="block font-semibold text-slate-700 mb-1">Event Time *</label>
-            <input type="text" id="new-event-time" value="10:00 AM - 1:00 PM" required class="w-full px-3 py-2 border rounded-xl focus:ring-2 focus:ring-indigo-500">
+            <label class="block font-bold text-coffee-800 mb-1">Time *</label>
+            <input type="text" id="new-event-time" required value="10:00 AM" class="w-full px-3 py-2 rounded-xl border border-amber-200 text-coffee-950 outline-none">
           </div>
         </div>
 
-        <div class="grid grid-cols-2 gap-3">
-          <div>
-            <label class="block font-semibold text-slate-700 mb-1">Capacity *</label>
-            <input type="number" id="new-event-capacity" min="1" value="50" required class="w-full px-3 py-2 border rounded-xl focus:ring-2 focus:ring-indigo-500">
+        <div class="grid grid-cols-3 gap-3">
+          <div class="col-span-1">
+            <label class="block font-bold text-coffee-800 mb-1">Venue *</label>
+            <input type="text" id="new-event-venue" required value="Main Arena" class="w-full px-3 py-2 rounded-xl border border-amber-200 text-coffee-950 outline-none">
           </div>
           <div>
-            <label class="block font-semibold text-slate-700 mb-1">Fee (₹)</label>
-            <input type="number" id="new-event-fee" min="0" value="0" class="w-full px-3 py-2 border rounded-xl focus:ring-2 focus:ring-indigo-500">
+            <label class="block font-bold text-coffee-800 mb-1">Capacity *</label>
+            <input type="number" id="new-event-capacity" required value="50" min="1" class="w-full px-3 py-2 rounded-xl border border-amber-200 text-coffee-950 outline-none">
+          </div>
+          <div>
+            <label class="block font-bold text-coffee-800 mb-1">Fee (₹)</label>
+            <input type="number" id="new-event-fee" value="0" min="0" class="w-full px-3 py-2 rounded-xl border border-amber-200 text-coffee-950 outline-none">
           </div>
         </div>
 
-        <div>
-          <label class="block font-semibold text-slate-700 mb-1">Description</label>
-          <textarea id="new-event-desc" rows="2" class="w-full px-3 py-2 border rounded-xl focus:ring-2 focus:ring-indigo-500" placeholder="Event overview and guidelines..."></textarea>
-        </div>
-
-        <div class="pt-3 flex justify-end gap-2">
-          <button type="button" id="cancel-add-event-btn" class="px-4 py-2 rounded-xl text-slate-600 hover:bg-slate-100 font-semibold transition">Cancel</button>
-          <button type="submit" id="save-new-event-btn" class="px-5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold shadow-md transition">Create Event</button>
+        <div class="pt-3 flex justify-end gap-2.5">
+          <button type="button" id="cancel-add-event-btn" class="px-4 py-2 rounded-xl text-coffee-700 hover:bg-amber-100 font-bold transition">Cancel</button>
+          <button type="submit" id="save-new-event-btn" class="px-5 py-2 rounded-xl bg-gradient-to-r from-butter-300 to-amber-500 hover:from-butter-200 hover:to-amber-400 text-coffee-950 font-bold shadow-md transition">Create Scoop</button>
         </div>
       </form>
     </div>
   </div>
 
-  <footer class="bg-slate-900 border-t border-slate-800 text-slate-400 text-xs py-6 mt-auto">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center sm:text-left flex flex-col sm:flex-row justify-between items-center gap-2">
-      <div>Zenith '26 College Fest Management System · Coordinator Portal</div>
-      <a href="/" class="text-indigo-400 hover:underline">Return to Student Portal</a>
+  <footer class="bg-coffee-950 border-t-2 border-amber-600/30 text-amber-200/80 text-xs py-6 mt-auto">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-2 text-center sm:text-left">
+      <div>Zenith '26 Fest Operations · Coordinator Lounge ☕🍨</div>
+      <a href="/" class="text-butter-300 font-bold hover:underline">Return to Fest Menu →</a>
     </div>
   </footer>
 

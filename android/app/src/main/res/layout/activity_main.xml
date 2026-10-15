@@ -238,8 +238,8 @@
                                     android:background="@drawable/bg_category_active"
                                     android:paddingHorizontal="14dp"
                                     android:paddingVertical="7dp"
-                                    android:text="All Events"
-                                    android:textColor="@color/white"
+                                    android:text="🍦 All Scoops"
+                                    android:textColor="@color/butter_200"
                                     android:textSize="12sp"
                                     android:textStyle="bold" />
 
@@ -251,8 +251,8 @@
                                     android:background="@drawable/bg_category_inactive"
                                     android:paddingHorizontal="14dp"
                                     android:paddingVertical="7dp"
-                                    android:text="💻 Technical"
-                                    android:textColor="@color/slate_700"
+                                    android:text="☕ Dark Roast Tech"
+                                    android:textColor="@color/coffee_800"
                                     android:textSize="12sp"
                                     android:textStyle="bold" />
 
@@ -264,8 +264,8 @@
                                     android:background="@drawable/bg_category_inactive"
                                     android:paddingHorizontal="14dp"
                                     android:paddingVertical="7dp"
-                                    android:text="🎭 Cultural"
-                                    android:textColor="@color/slate_700"
+                                    android:text="🍨 Vanilla Culture"
+                                    android:textColor="@color/coffee_800"
                                     android:textSize="12sp"
                                     android:textStyle="bold" />
 
@@ -277,8 +277,8 @@
                                     android:background="@drawable/bg_category_inactive"
                                     android:paddingHorizontal="14dp"
                                     android:paddingVertical="7dp"
-                                    android:text="⚽ Sports"
-                                    android:textColor="@color/slate_700"
+                                    android:text="⚡ Espresso Sports"
+                                    android:textColor="@color/coffee_800"
                                     android:textSize="12sp"
                                     android:textStyle="bold" />
 
@@ -290,8 +290,8 @@
                                     android:background="@drawable/bg_category_inactive"
                                     android:paddingHorizontal="14dp"
                                     android:paddingVertical="7dp"
-                                    android:text="🎮 Gaming"
-                                    android:textColor="@color/slate_700"
+                                    android:text="🍫 Choco Gaming"
+                                    android:textColor="@color/coffee_800"
                                     android:textSize="12sp"
                                     android:textStyle="bold" />
 
@@ -303,8 +303,8 @@
                                     android:background="@drawable/bg_category_inactive"
                                     android:paddingHorizontal="14dp"
                                     android:paddingVertical="7dp"
-                                    android:text="⚡ Workshop"
-                                    android:textColor="@color/slate_700"
+                                    android:text="🧇 Waffle Workshop"
+                                    android:textColor="@color/coffee_800"
                                     android:textSize="12sp"
                                     android:textStyle="bold" />
                             </LinearLayout>

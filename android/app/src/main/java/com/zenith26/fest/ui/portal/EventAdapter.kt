@@ -55,26 +55,26 @@ class EventAdapter(
 
             // Availability Badge
             if (event.isFull) {
-                binding.cardEventSeats.text = "FULL"
+                binding.cardEventSeats.text = "🍫 SOLD OUT"
                 binding.cardEventSeats.setTextColor(ContextCompat.getColor(context, R.color.red_700))
                 binding.cardEventSeats.setBackgroundResource(R.drawable.bg_badge_full)
-                binding.cardBtnRegister.text = "View Event →"
+                binding.cardBtnRegister.text = "View Scoop →"
                 binding.cardBtnRegister.setBackgroundResource(R.drawable.bg_button_slate)
             } else {
-                binding.cardEventSeats.text = "${event.availableSeats} / ${event.capacity} left"
+                binding.cardEventSeats.text = "🍨 ${event.availableSeats} / ${event.capacity} scoops left"
                 binding.cardEventSeats.setTextColor(ContextCompat.getColor(context, R.color.slate_600))
                 binding.cardEventSeats.setBackgroundResource(R.drawable.bg_badge_seats)
-                binding.cardBtnRegister.text = "View & Register →"
+                binding.cardBtnRegister.text = "Taste & Reserve →"
                 binding.cardBtnRegister.setBackgroundResource(R.drawable.bg_button_indigo)
             }
 
             // Fee
             if (event.fee > 0) {
-                binding.cardEventFee.text = "₹${event.fee}"
-                binding.cardEventFee.setTextColor(ContextCompat.getColor(context, R.color.brand_600))
+                binding.cardEventFee.text = "🍫 ₹${event.fee} Treat"
+                binding.cardEventFee.setTextColor(ContextCompat.getColor(context, R.color.coffee_900))
             } else {
-                binding.cardEventFee.text = "Free"
-                binding.cardEventFee.setTextColor(ContextCompat.getColor(context, R.color.emerald_600))
+                binding.cardEventFee.text = "✨ Free Scoop"
+                binding.cardEventFee.setTextColor(ContextCompat.getColor(context, R.color.choco_caramel))
             }
 
             // Click Handlers
@@ -84,12 +84,12 @@ class EventAdapter(
 
         private fun applyCategoryStyle(view: android.widget.TextView, category: String) {
             val (bgColor, textColor, strokeColor) = when (category.lowercase()) {
-                "technical" -> Triple("#EFF6FF", "#1D4ED8", "#BFDBFE")
-                "cultural" -> Triple("#FAF5FF", "#7E22CE", "#E9D5FF")
-                "sports" -> Triple("#ECFDF5", "#047857", "#A7F3D0")
-                "gaming" -> Triple("#FFF1F2", "#BE123C", "#FECDD3")
-                "workshop" -> Triple("#FFFBEB", "#B45309", "#FDE68A")
-                else -> Triple("#F1F5F9", "#334155", "#E2E8F0")
+                "technical" -> Triple("#FEF3C7", "#451A03", "#FDE68A")
+                "cultural" -> Triple("#FCE7F3", "#831843", "#FBCFE8")
+                "sports" -> Triple("#D1FAE5", "#064E3B", "#A7F3D0")
+                "gaming" -> Triple("#EDE9FE", "#4C1D95", "#DDD6FE")
+                "workshop" -> Triple("#FEF08A", "#713F12", "#FACC15")
+                else -> Triple("#FFFDF5", "#382319", "#FDE68A")
             }
 
             val drawable = GradientDrawable().apply {
